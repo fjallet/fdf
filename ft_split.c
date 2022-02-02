@@ -1,16 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_splitnum.c                                      :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/02 11:50:40 by fjallet           #+#    #+#             */
-/*   Updated: 2022/02/02 17:55:06 by fjallet          ###   ########.fr       */
+/*   Created: 2021/11/29 17:08:20 by fjallet           #+#    #+#             */
+/*   Updated: 2022/02/02 17:53:50 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static void	ft_splitfree(char **str, size_t j)
+{
+	while (j > 0 && str[j])
+	{
+		j--;
+		free(str[j]);
+	}
+	free(str);
+}
 
 static size_t	ft_countchar(char const *s, char c, size_t j)
 {
@@ -21,6 +31,27 @@ static size_t	ft_countchar(char const *s, char c, size_t j)
 	while (s[i] && s[i] != c)
 		i++;
 	return (i);
+}
+
+static char	*ft_putstr(char const *s, size_t c, size_t j, char **str)
+{
+	size_t	i;
+	char	*res;
+
+	i = 0;
+	res = malloc(sizeof(char) * (c + 1));
+	if (!res)
+	{
+		ft_splitfree(str, j);
+		return (0);
+	}
+	while (i < c)
+	{
+		res[i] = s[i];
+		i++;
+	}
+	res[i] = '\0';
+	return (res);
 }
 
 static size_t	ft_countw(char const *s, char c)
@@ -48,19 +79,15 @@ static size_t	ft_countw(char const *s, char c)
 	return (count);
 }
 
-int	*ft_splitnum(char const *s, char c)
+char	**ft_split(char *s, char c)
 {
 	size_t	i;
 	size_t	j;
-	int		*res;
-	int		count;
+	char	**res;
 
 	i = 0;
 	j = 0;
-	if (!s)
-		return (0);
-	count = ft_countw(s, c);
-	res = malloc(sizeof(int) * count);
+	res = malloc(sizeof(char *) * (ft_countw(s, c) + 1));
 	if (!res)
 		return (0);
 	while (s[i])
@@ -69,9 +96,13 @@ int	*ft_splitnum(char const *s, char c)
 			i++;
 		if (s[i] != c && s[i])
 		{
-			res[j] = ft_atoi(&s[i]);
+			res[j] = ft_putstr(&s[i], ft_countchar(&s[i], c, j), j, res);
+			if (!res)
+				return (0);
 			i += ft_countchar(&s[i], c, j++);
 		}
 	}
+	res[j] = 0;
+	free(s);
 	return (res);
 }
