@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 14:50:29 by fjallet           #+#    #+#             */
-/*   Updated: 2022/02/02 17:41:29 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/02/07 15:44:41 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,32 @@ typedef struct s_vars {
 	void	*win;
 }				t_vars;
 
-typedef struct s_list	t_list;
+typedef struct s_coor {
+	float	x;
+	float	y;
+	float	z;
+}				t_coor;
 
-struct s_list
-{
-	int		content;
-	t_list	*next;
-};
+typedef struct s_size {
+	float	x;
+	float	y;
+}				t_size;
+
+//ft_vect.c
+t_coor	crea_vect(t_coor a, t_coor b);
+t_coor	crea_d(t_coor point);
+t_coor	crea_y(t_coor objet);
+t_coor	crea_x(t_coor objet, t_coor y_vecteur);
+t_coor	ortho(t_coor vect);
+
+//ft_point.c
+t_coor	ft_inter_point(t_coor A, float t);
+t_coor	crea_p(t_size t, t_coor u, t_coor v, t_coor a);
+
+//ft_coord.c
+float	res_equa(t_coor A, t_coor a, t_coor u, t_coor v);
+float	ft_scalaire(t_coor a, t_coor b);
+float	ft_prop(t_coor u, t_coor P, t_coor alpha, t_coor alphap);
 
 //ft_maptrim
 char	**ft_split(char *s, char c);
