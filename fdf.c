@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 18:07:30 by fjallet           #+#    #+#             */
-/*   Updated: 2022/02/02 18:15:38 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/02/08 17:32:12 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,48 +19,32 @@ int	close_window(int key, t_vars *vars)
 	return (0);
 }
 
-/*int	main()
+void	ft_img(void)
 {
+	t_data	img;
 	t_vars	vars;
+	t_pos	a;
+	t_pos	b;
+	int		e2;
 
+	a.x = 50;
+	a.y = 50;
+	b.x = 1500;
+	b.y = 100;
+	e2 = 0;
 	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 500, 500, "mlx 42");
-	mlx_pixel_put(vars.mlx, vars.win, 250, 250, 0xFFFFFF);
+	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "mlx 42");
+	img.img = mlx_new_image(vars.mlx, 1920, 1080);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, \
+	&img.line_length, &img.endian);
+	ft_segment(a, b, img, e2);
+	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
 	mlx_key_hook(vars.win, close_window, &vars);
 	mlx_loop(vars.mlx);
-	return (0);
-}*/
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
 }
 
-void	ft_printtab(t_list **tab)
+int	main(void)
 {
-	int		i;
-	t_list	*temp;
-
-	while (*tab != NULL)
-	{
-		i = 0;
-		while ((*tab)->content[i])
-		{
-			printf("%i ", (*tab)->content[i]);
-			i++;
-		}
-		temp = *tab;
-		*tab = (*tab)->next;
-		printf("/n");
-	}
-}
-
-/*int	main()
-{
-	t_list	**tab;
-
-	tab = map_trim("text.txt");
-	ft_printtab(tab);
-	ft_lstclear(tab, free);
+	ft_img();
 	return (0);
-}*/
+}

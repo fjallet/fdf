@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:14:13 by fjallet           #+#    #+#             */
-/*   Updated: 2022/02/07 16:27:59 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/02/08 15:19:37 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,13 @@ t_coor	crea_x(t_coor objet, t_coor y_vecteur)
 	return (x_vecteur);
 }
 
-//t_coor	ortho(t_coor vect)
+t_coor	ortho(t_coor vect)
+{
+	float	n;
+
+	n = sqrt(vect.x * vect.x + vect.y * vect.y + vect.z + vect.z);
+	vect.x = vect.x / n;
+	vect.y = vect.y / n;
+	vect.z = vect.z / n;
+	return (vect);
+}

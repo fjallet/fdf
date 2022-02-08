@@ -2,7 +2,7 @@ NAME = fdf.out
 
 HEADERS = fdf.h
 
-SRCS = ft_maptrim.c ft_split.c ft_splitnum.c fdf_utils.c ft_free.c
+SRCS = fdf.c ft_putpixel.c
 
 OBJETS = ${SRCS:.c=.o}
 

@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 15:52:35 by fjallet           #+#    #+#             */
-/*   Updated: 2022/02/02 17:11:40 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/02/08 15:19:39 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,19 @@ int	ft_countn(char *str, char c, char n)
 		i++;
 	}
 	return (count);
+}
+
+t_2d	**ft_malloc2d(char *name)
+{
+	t_2d	p;
+	int		i;
+
+	i = 0;
+	p = malloc(sizeof(*t_2d) * ft_countn(ft_readmap(name), '\n', '\0'));
+	while (i <= ft_countn(ft_readmap(name), '\n', '\0'))
+	{
+		p[i] = malloc(sizeof(t_2d) * ft_countn(ft_readmap(name), ' ', '\n'));
+		i++;
+	}
+	return (p);
 }

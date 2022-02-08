@@ -6,23 +6,13 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:14:41 by fjallet           #+#    #+#             */
-/*   Updated: 2022/02/07 16:28:01 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/02/08 15:19:42 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_coor	ft_inter_point(t_coor A, float t)
-{
-	t_coor	ainter;
-
-	ainter.x = A.x * (t + 1);
-	ainter.y = A.y * (t + 1);
-	ainter.z = A.z * (t + 1);
-	return (Ainter);
-}
-
-`
+t_coor	crea_p(t_2d t, t_coor u, t_coor v, t_coor a)
 {
 	t_coor	p;
 
@@ -30,4 +20,24 @@ t_coor	ft_inter_point(t_coor A, float t)
 	p.y = a.y + t.x * u.y + t.y * v.y;
 	p.z = a.z + t.x * u.z + t.y * v.z;
 	return (p);
+}
+
+t_coor	crea_alphap(t_coor a, float t)
+{
+	t_coor	alphap;
+
+	alphap.x = a.x * (t + 1);
+	alphap.y = a.y * (t + 1);
+	alphap.z = a.z * (t + 1);
+	return (alphap);
+}
+
+t_coor	crea_alpha(t_coor u, t_coor o)
+{
+	t_coor	alpha;
+
+	alpha.x = o.x + u.x;
+	alpha.y = o.y + u.y;
+	alpha.z = o.z + u.z;
+	return (alpha);
 }

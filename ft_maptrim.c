@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 15:07:47 by fjallet           #+#    #+#             */
-/*   Updated: 2022/02/02 18:15:27 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/02/08 15:19:36 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,48 @@ int	**map_trim(char *name)
 	}
 	res_free(res);
 	return (tab);
+}
+
+t_coor	**ft_mapstruct(int **tab, char *name)
+{
+	t_coor	**tabstruct;
+	int		i;
+	int		j;
+
+	i = 0;
+	tabstruct = ft_mallocstruct(name);
+	j = 0;
+	while (i <= ft_countn(ft_readmap(name), '\n', '\0'))
+	{
+		j = 0;
+		while (j <= ft_countn(ft_readmap(name), ' ', '\n'))
+		{
+			tabstruct[i][j].x = j;
+			tabstruct[i][j].y = i;
+			tabstruct[i][j].z = tab[i][j];
+			j++;
+		}
+		i++;
+	}
+	tabfree(tab);
+	return (tabstruct);
+}
+
+t_coor	**ft_mallocstruct(char *name)
+{
+	int		i;
+	t_coor	**tabstruct;
+
+	i = 0;
+	tabstruct = malloc(sizeof(*t_coor) * ft_countn(ft_readmap(name) \
+	, '\n', '\0'));
+	while (i <= ft_countn(ft_readmap(name), '\n', '\0'))
+	{
+		tabstruct[i] = malloc(sizeof(t_coor) * ft_countn(ft_readmap(name) \
+		, ' ', '\n'));
+		i++;
+	}
+	return (tabstruct);
 }
 
 /*int	main()
