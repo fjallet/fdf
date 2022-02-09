@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:14:13 by fjallet           #+#    #+#             */
-/*   Updated: 2022/02/08 15:19:37 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/02/09 15:05:22 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_coor	ortho(t_coor vect)
 {
 	float	n;
 
-	n = sqrt(vect.x * vect.x + vect.y * vect.y + vect.z + vect.z);
+	n = sqrtf(vect.x * vect.x + vect.y * vect.y + vect.z + vect.z);
 	vect.x = vect.x / n;
 	vect.y = vect.y / n;
 	vect.z = vect.z / n;

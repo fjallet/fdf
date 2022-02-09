@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 17:08:20 by fjallet           #+#    #+#             */
-/*   Updated: 2022/02/02 17:53:50 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/02/09 15:33:42 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static size_t	ft_countchar(char const *s, char c, size_t j)
 	return (i);
 }
 
-static char	*ft_putstr(char const *s, size_t c, size_t j, char **str)
+static char	*ft_put_str(char const *s, size_t c, size_t j, char **str)
 {
 	size_t	i;
 	char	*res;
@@ -96,7 +96,7 @@ char	**ft_split(char *s, char c)
 			i++;
 		if (s[i] != c && s[i])
 		{
-			res[j] = ft_putstr(&s[i], ft_countchar(&s[i], c, j), j, res);
+			res[j] = ft_put_str(&s[i], ft_countchar(&s[i], c, j), j, res);
 			if (!res)
 				return (0);
 			i += ft_countchar(&s[i], c, j++);

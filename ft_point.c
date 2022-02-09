@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:14:41 by fjallet           #+#    #+#             */
-/*   Updated: 2022/02/08 15:19:42 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/02/09 12:32:15 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,14 @@ t_coor	crea_alpha(t_coor u, t_coor o)
 	alpha.y = o.y + u.y;
 	alpha.z = o.z + u.z;
 	return (alpha);
+}
+
+t_coor	init_objet(void)
+{
+	t_coor	o;
+
+	o.x = 10;
+	o.y = 10;
+	o.z = -10;
+	return (o);
 }

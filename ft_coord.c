@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:14:31 by fjallet           #+#    #+#             */
-/*   Updated: 2022/02/08 15:19:38 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/02/09 14:16:18 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ float	ft_prop(t_coor u, t_coor P, t_coor alpha, t_coor alphap)
 	return (p);
 }
 
-t_2d	**ft_remp(t_coor **tab, char *name, t_coor *vect, t_coor alpha)
+t_2d	**ft_remp(t_coor **tab, char *name, t_coor *vect, t_2d taille)
 {
 	t_2d	**ptab;
 	int		i;
@@ -50,17 +50,18 @@ t_2d	**ft_remp(t_coor **tab, char *name, t_coor *vect, t_coor alpha)
 	t_coor	alphap;
 	t_coor	p;
 
-	p = crea_p(taille, vect[1], vect[2], alpha);
+	p = crea_p(taille, vect[1], vect[2], vect[3]);
 	i = 0;
-	ptab = ft_malloc2d(char *name);
+	ptab = ft_malloc2d(name);
 	while (i <= ft_countn(ft_readmap(name), '\n', '\0'))
 	{
 		j = 0;
 		while (j <= ft_countn(ft_readmap(name), ' ', '\n'))
 		{
-			alphap = crea_alphap(tab[i][j], res_equa(tab[i][j], alpha, u, v));
-			ptab[i][j].x = ft_prop(vect[1], p, alpha, alphap);
-			ptab[i][j].y = ft_prop(vect[2], p, alpha, alphap);
+			alphap = crea_alphap(tab[i][j], res_equa(tab[i][j], vect[3], \
+			vect[1], vect[2]));
+			ptab[i][j].x = ft_prop(vect[1], p, vect[3], alphap);
+			ptab[i][j].y = ft_prop(vect[2], p, vect[3], alphap);
 			j++;
 		}
 		i++;
@@ -68,16 +69,18 @@ t_2d	**ft_remp(t_coor **tab, char *name, t_coor *vect, t_coor alpha)
 	return (ptab);
 }
 
-t_2d	**ft_setup(t_coor **tab, char *name, t_coor objet, t_2d taille)
+t_2d	**ft_setup(t_coor **tab, char *name, t_coor objet, t_pos taille)
 {
-	t_coor	vect[3];
-	t_coor	alpha;
+	t_coor	vect[4];
+	t_2d	t;
 	t_2d	**ptab;
 
 	vect[0] = objet;
 	vect[2] = crea_y(objet);
 	vect[1] = crea_x(objet, vect[2]);
-	alpha = crea_alpha(ortho(vect[0]), vect[0]);
-	ptab = ft_remp(tab, name, vect, alpha);
+	vect[3] = crea_alpha(ortho(vect[0]), vect[0]);
+	t.x = (float)taille.x / 500;
+	t.y = (float)taille.y / 500;
+	ptab = ft_remp(tab, name, vect, t);
 	return (ptab);
 }

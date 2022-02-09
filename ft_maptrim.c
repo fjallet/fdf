@@ -5,37 +5,80 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/02 15:07:47 by fjallet           #+#    #+#             */
-/*   Updated: 2022/02/08 15:19:36 by fjallet          ###   ########.fr       */
+/*   Created: 2022/02/09 16:11:13 by fjallet           #+#    #+#             */
+/*   Updated: 2022/02/09 18:32:18 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-char	*ft_strjoin(char *old, char *src)
+int	**ft_maptrim(char *name, t_pos tmap)
 {
-	size_t	i;
-	char	*new;
+	int		i;
+	char	*res;
+	int		**tab;
+	int		fd;
 
 	i = 0;
-	new = malloc(sizeof(char) * (ft_strlen(old) + ft_strlen(src) + 1));
-	if (!new)
-		return (0);
-	while (old && old[i])
+	res = "ah";
+	fd = open(name, O_RDONLY);
+	tab = malloc (sizeof(int **) * ((tmap.x)));
+	if (!tab)
+		return (NULL);
+	while (res != NULL)
 	{
-		new[i] = old[i];
+		res = get_next_line(fd);
+		if (res == NULL)
+			break ;
+		tab[i] = ft_splitnum(res, ' ');
+		if (tab[i] == NULL)
+			return (0);
 		i++;
+		free(res);
 	}
+	close(fd);
+	return (tab);
+}
+
+t_coor	**ft_mapstruct(int **tab, t_pos tmap)
+{
+	t_coor	**tabstruct;
+	int		i;
+	int		j;
+
 	i = 0;
-	while (src[i] != '\0')
+	tabstruct = ft_malloc_coor(tmap);
+	j = 0;
+	while (i < tmap.x)
 	{
-		new[i + ft_strlen(old)] = src[i];
+		j = 0;
+		while (j < tmap.y)
+		{
+			tabstruct[i][j].x = j;
+			tabstruct[i][j].y = i;
+			tabstruct[i][j].z = tab[i][j];
+			j++;
+		}
 		i++;
 	}
-	new[i + ft_strlen(old)] = '\0';
-	if (old)
-		free(old);
-	return (new);
+	ft_putstr("map_struct\n");
+	return (tabstruct);
+}
+
+t_coor	**ft_malloc_coor(t_pos tmap)
+{
+	int		i;
+	t_coor	**tabstruct;
+
+	i = 0;
+	tabstruct = malloc(sizeof(t_coor **) * tmap.x);
+	while (i <= tmap.x)
+	{
+		tabstruct[i] = malloc(sizeof(t_coor *) * tmap.y);
+		i++;
+	}
+	ft_putstr("ft_malloc_coor\n");
+	return (tabstruct);
 }
 
 char	*ft_readmap(char *name)
@@ -61,71 +104,3 @@ char	*ft_readmap(char *name)
 	close(fd);
 	return (str);
 }
-
-int	**map_trim(char *name)
-{
-	int		i;
-	char	**res;
-	int		**tab;
-
-	i = 0;
-	res = ft_split(ft_readmap(name), '\n');
-	tab = malloc (sizeof(int *) * ((ft_strlenspe(res) + 1)));
-	if (!tab)
-		return (NULL);
-	while (res[i])
-	{
-		tab[i] = ft_splitnum(res[i], ' ');
-		i++;
-	}
-	res_free(res);
-	return (tab);
-}
-
-t_coor	**ft_mapstruct(int **tab, char *name)
-{
-	t_coor	**tabstruct;
-	int		i;
-	int		j;
-
-	i = 0;
-	tabstruct = ft_mallocstruct(name);
-	j = 0;
-	while (i <= ft_countn(ft_readmap(name), '\n', '\0'))
-	{
-		j = 0;
-		while (j <= ft_countn(ft_readmap(name), ' ', '\n'))
-		{
-			tabstruct[i][j].x = j;
-			tabstruct[i][j].y = i;
-			tabstruct[i][j].z = tab[i][j];
-			j++;
-		}
-		i++;
-	}
-	tabfree(tab);
-	return (tabstruct);
-}
-
-t_coor	**ft_mallocstruct(char *name)
-{
-	int		i;
-	t_coor	**tabstruct;
-
-	i = 0;
-	tabstruct = malloc(sizeof(*t_coor) * ft_countn(ft_readmap(name) \
-	, '\n', '\0'));
-	while (i <= ft_countn(ft_readmap(name), '\n', '\0'))
-	{
-		tabstruct[i] = malloc(sizeof(t_coor) * ft_countn(ft_readmap(name) \
-		, ' ', '\n'));
-		i++;
-	}
-	return (tabstruct);
-}
-
-/*int	main()
-{
-	tab_free(map_trim("map1.txt"), "map1.txt");
-	return (0);
-}*/
