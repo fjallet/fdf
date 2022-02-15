@@ -56,25 +56,27 @@ char	*ft_strdup(char *s1)
 	return (ptr);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, int id)
 {
 	int			bs;
 	char		*str;
-	static char	*rst = NULL;
+	static char	*rst[4096];
 	char		buf[11];
 
 	bs = 10;
-	while (ft_strchr(rst, '\n') == 0 && bs == 10)
+	if (!rst[id])
+		rst[id] = NULL;
+	while (ft_strchr(rst[id], '\n') == 0 && bs == 10)
 	{
 		bs = read(fd, buf, 10);
 		if (bs < 0 || fd < 0 || fd > 1024)
 			return (NULL);
-		if (bs == 0 && ft_strlen(rst) == 0 && ft_endfree(rst))
+		if (bs == 0 && ft_strlen(rst[id]) == 0 && ft_endfree(rst[id]))
 			return (NULL);
 		buf[bs] = '\0';
-		rst = ft_strjoin(rst, buf);
+		rst[id] = ft_strjoin(rst[id], buf);
 	}
-	str = ft_strtrim1(rst);
-	rst = ft_strtrim2(rst);
+	str = ft_strtrim1(rst[id]);
+	rst[id] = ft_strtrim2(rst[id]);
 	return (str);
 }

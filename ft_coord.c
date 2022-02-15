@@ -42,9 +42,9 @@ float	ft_prop(t_coor u, t_coor P, t_coor alpha, t_coor alphap)
 	return (p);
 }
 
-t_2d	**ft_remp(t_coor **tab, char *name, t_coor *vect, t_2d taille)
+t_pos	**ft_remp(t_coor **tab, t_pos tmap, t_coor *vect, t_pos taille)
 {
-	t_2d	**ptab;
+	t_pos	**ptab;
 	int		i;
 	int		j;
 	t_coor	alphap;
@@ -52,35 +52,33 @@ t_2d	**ft_remp(t_coor **tab, char *name, t_coor *vect, t_2d taille)
 
 	p = crea_p(taille, vect[1], vect[2], vect[3]);
 	i = 0;
-	ptab = ft_malloc2d(name);
-	while (i <= ft_countn(ft_readmap(name), '\n', '\0'))
+	ptab = ft_mallocpos(tmap);
+	while (i <= tmap.x)
 	{
 		j = 0;
-		while (j <= ft_countn(ft_readmap(name), ' ', '\n'))
+		while (j <= tmap.y)
 		{
 			alphap = crea_alphap(tab[i][j], res_equa(tab[i][j], vect[3], \
 			vect[1], vect[2]));
-			ptab[i][j].x = ft_prop(vect[1], p, vect[3], alphap);
-			ptab[i][j].y = ft_prop(vect[2], p, vect[3], alphap);
+			ptab[i][j].x = ft_prop(vect[1], p, vect[3], alphap) * taille.x;
+			ptab[i][j].y = ft_prop(vect[2], p, vect[3], alphap) * taille.y;
 			j++;
 		}
 		i++;
 	}
+	printf("\n");
 	return (ptab);
 }
 
-t_2d	**ft_setup(t_coor **tab, char *name, t_coor objet, t_pos taille)
+t_pos	**ft_setup(t_coor **tab, t_pos tmap, t_coor objet, t_pos taille)
 {
 	t_coor	vect[4];
-	t_2d	t;
-	t_2d	**ptab;
+	t_pos	**ptab;
 
 	vect[0] = objet;
 	vect[2] = crea_y(objet);
 	vect[1] = crea_x(objet, vect[2]);
 	vect[3] = crea_alpha(ortho(vect[0]), vect[0]);
-	t.x = (float)taille.x / 500;
-	t.y = (float)taille.y / 500;
-	ptab = ft_remp(tab, name, vect, t);
+	ptab = ft_remp(tab, tmap, vect, taille);
 	return (ptab);
 }

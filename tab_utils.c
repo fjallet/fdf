@@ -12,44 +12,18 @@
 
 #include "fdf.h"
 
-t_pos	**ft_malloc_pos(char *name)
+t_pos	**ft_mallocpos(t_pos tmap)
 {
 	int		i;
 	t_pos	**tab;
 
 	i = 0;
-	tab = malloc(sizeof(t_pos **) * ft_countn(ft_readmap(name) \
-	, '\n', '\0'));
-	while (i <= ft_countn(ft_readmap(name), '\n', '\0'))
+	tab = malloc(sizeof(t_pos *) * tmap.x);
+	while (i <= tmap.x)
 	{
-		tab[i] = malloc(sizeof(t_pos *) * ft_countn(ft_readmap(name) \
-		, ' ', '\n'));
+		tab[i] = malloc(sizeof(t_pos) * tmap.y);
 		i++;
 	}
-	return (tab);
-}
-
-t_pos	**ft_posi_pxl(t_2d **tabstruct, t_pos taille, char *name)
-{
-	int		i;
-	int		j;
-	t_pos	**tab;
-
-	i = 0;
-	j = 0;
-	tab = ft_malloc_pos(name);
-	while (i <= ft_countn(ft_readmap(name), '\n', '\0'))
-	{
-		j = 0;
-		while (j <= ft_countn(ft_readmap(name), ' ', '\n'))
-		{
-			tab[i][j].x = tabstruct[i][j].x * taille.x;
-			tab[i][j].y = tabstruct[i][j].y * taille.y;
-			j++;
-		}
-		i++;
-	}
-	//tab2d_free(tabstruct, name);
 	return (tab);
 }
 

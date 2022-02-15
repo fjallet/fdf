@@ -12,30 +12,6 @@
 
 #include "fdf.h"
 
-/*size_t	ft_strlen(char	*str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
-		i++;
-	return (i);
-}*/
-
-size_t	ft_strlenspe(char	**str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
-		i++;
-	return (i);
-}
-
 int	ft_atoi(const char *str)
 {
 	int	num;
@@ -62,33 +38,30 @@ int	ft_atoi(const char *str)
 	return (num * sig);
 }
 
-int	ft_countn(char *str, char c, char n)
+t_pos	ft_count(char *name)
 {
-	int	i;
-	int	count;
+	int		i;
+	int		count;
+	t_pos	tmap;
+	char	*str;
+	int		fd;
 
 	i = 0;
 	count = 0;
-	while (str && str[i] != n && str[i])
+	fd = open(name, O_RDONLY);
+	str = get_next_line(fd, 1);
+	while (str && str[i] != '\0' && str[i])
 	{
-		if (str[i] == c)
+		if (str[i] == ' ')
 			count++;
 		i++;
 	}
-	return (count);
-}
-
-t_2d	**ft_malloc2d(char *name)
-{
-	t_2d	**p;
-	int		i;
-
+	free(str);
+	tmap.y = count;
 	i = 0;
-	p = malloc(sizeof(t_2d **) * ft_countn(ft_readmap(name), '\n', '\0'));
-	while (i <= ft_countn(ft_readmap(name), '\n', '\0'))
-	{
-		p[i] = malloc(sizeof(t_2d *) * ft_countn(ft_readmap(name), ' ', '\n'));
-		i++;
-	}
-	return (p);
+	while (str != NULL && i++ >= 0)
+		str = get_next_line(fd, 1);
+	tmap.x = i - 1;
+	close(fd);
+	return (tmap);
 }

@@ -23,45 +23,18 @@ static size_t	ft_countchar(char const *s, char c, size_t j)
 	return (i);
 }
 
-static size_t	ft_countw(char const *s, char c)
-{
-	size_t	i;
-	size_t	t;
-	size_t	count;
-	char	*s_temp;
-
-	i = 0;
-	t = 1;
-	count = 0;
-	s_temp = (char *)s;
-	while (s[i])
-	{
-		if (s[i] == c)
-			t = 1;
-		else if (s[i] != c && t == 1)
-		{
-			count++;
-			t = 0;
-		}
-		i++;
-	}
-	return (count);
-}
-
-int	*ft_splitnum(char const *s, char c)
+t_coor	*ft_splitcoor(char *s, char c, int l, t_pos tmap)
 {
 	size_t	i;
 	size_t	j;
-	int		*res;
-	int		count;
+	t_coor	*tab;
 
 	i = 0;
 	j = 0;
 	if (!s)
 		return (0);
-	count = ft_countw(s, c);
-	res = malloc(sizeof(int) * count);
-	if (!res)
+	tab = malloc(sizeof(t_coor) * (tmap.y + 1));
+	if (!tab)
 		return (0);
 	while (s[i])
 	{
@@ -69,9 +42,12 @@ int	*ft_splitnum(char const *s, char c)
 			i++;
 		if (s[i] != c && s[i])
 		{
-			res[j] = ft_atoi(&s[i]);
+			tab[j].x = (float)l + 1;
+			tab[j].y = (float)j + 1;
+			tab[j].z = (float)ft_atoi(&s[i]);
 			i += ft_countchar(&s[i], c, j++);
 		}
 	}
-	return (res);
+	free(s);
+	return (tab);
 }

@@ -12,29 +12,26 @@
 
 #include "fdf.h"
 
-int	**ft_maptrim(char *name, t_pos tmap)
+t_coor	**ft_maptrim(char *name, t_pos tmap)
 {
 	int		i;
 	char	*res;
-	int		**tab;
+	t_coor	**tab;
 	int		fd;
 
 	i = 0;
 	res = "ah";
 	fd = open(name, O_RDONLY);
-	tab = malloc (sizeof(int **) * ((tmap.x)));
+	tab = malloc(sizeof(t_coor *) * tmap.x);
 	if (!tab)
 		return (NULL);
-	while (res != NULL)
+	while (i <= tmap.x)
 	{
-		res = get_next_line(fd);
+		res = get_next_line(fd, 2);
 		if (res == NULL)
 			break ;
-		tab[i] = ft_splitnum(res, ' ');
-		if (tab[i] == NULL)
-			return (0);
+		tab[i] = ft_splitcoor(res, ' ', i, tmap);
 		i++;
-		free(res);
 	}
 	close(fd);
 	return (tab);

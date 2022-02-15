@@ -68,17 +68,17 @@ void	ft_soussegment(t_pos a, t_pos b, t_data img, t_pos s)
 	}
 }
 
-void	ft_put_to_img(t_pos **tabstruct, t_data img, char *name, t_pos taille)
+void	ft_put_to_img(t_pos **tabstruct, t_data img, t_pos tmap, t_pos taille)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (i < ft_countn(ft_readmap(name), '\n', '\0'))
+	while (i < tmap.x)
 	{
 		j = 0;
-		while (j < ft_countn(ft_readmap(name), ' ', '\n'))
+		while (j < tmap.y)
 		{
 			ft_segment(tabstruct[i][j], tabstruct[i][j + 1], img, taille);
 			ft_segment(tabstruct[i][j], tabstruct[i + 1][j], img, taille);
@@ -87,7 +87,7 @@ void	ft_put_to_img(t_pos **tabstruct, t_data img, char *name, t_pos taille)
 		i++;
 	}
 	j = 0;
-	while (j < ft_countn(ft_readmap(name), ' ', '\n'))
+	while (j < tmap.y)
 	{
 		ft_segment(tabstruct[i][j], tabstruct[i][j + 1], img, taille);
 		j++;

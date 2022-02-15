@@ -12,13 +12,16 @@
 
 #include "fdf.h"
 
-t_coor	crea_p(t_2d t, t_coor u, t_coor v, t_coor a)
+t_coor	crea_p(t_pos t, t_coor u, t_coor v, t_coor a)
 {
 	t_coor	p;
+	t_2d	tprop;
 
-	p.x = a.x + t.x * u.x + t.y * v.x;
-	p.y = a.y + t.x * u.y + t.y * v.y;
-	p.z = a.z + t.x * u.z + t.y * v.z;
+	tprop.x = t.x / 500;
+	tprop.y = t.y / 500;
+	p.x = a.x + tprop.x * u.x + tprop.y * v.x;
+	p.y = a.y + tprop.x * u.y + tprop.y * v.y;
+	p.z = a.z + tprop.x * u.z + tprop.y * v.z;
 	return (p);
 }
 
@@ -46,8 +49,8 @@ t_coor	init_objet(void)
 {
 	t_coor	o;
 
-	o.x = 10;
-	o.y = 10;
-	o.z = -10;
+	o.x = 20;
+	o.y = 20;
+	o.z = -20;
 	return (o);
 }

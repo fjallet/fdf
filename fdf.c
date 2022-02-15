@@ -22,6 +22,8 @@ void	ft_putstr(char *str)
 	int	i;
 
 	i = 0;
+	if (!str)
+		return ;
 	while (str[i])
 	{
 		ft_putchar(str[i]);
@@ -31,31 +33,21 @@ void	ft_putstr(char *str)
 
 void	ft_printstruct(char *name, t_coor objet, t_pos taille, t_data img)
 {
-	int		**tabint;
-	t_coor	**tabstruct;
-	t_2d	**tabf;
+	t_coor	**tabcoor;
 	t_pos	**tab;
 	t_pos	tmap;
 
-	ft_putstr("----0----\n");
-	tmap.y = ft_countn(ft_readmap(name), ' ', '\n');
-	tmap.x = ft_countn(ft_readmap(name), '\n', '\0');
+	printf("----0----\n");
+	tmap = ft_count(name);
 	printf("x = %i y = %i\n", tmap.x, tmap.y);
-	tabint = ft_maptrim(name, tmap);
-	//tabstruct = ft_mapstruct(tabint, tmap);
-	//tabint_free(tabint, tmap);
-	ft_putstr("----1----\n");
-	//tabf = ft_setup(tabstruct, name, objet, taille);
-	//tabcoor_free(tabstruct, tmap);
-	//ft_putstr("----2----\n");
-	//tab = ft_posi_pxl(tabf, taille, name);
-	//ft_putstr("----3----\n");
-	//ft_put_to_img(tab, img, name, taille);
-	(void)tabstruct;
-	(void)tabf;
-	(void)tab;
-	(void)objet;
-	(void)taille;
+	tabcoor = ft_maptrim(name, tmap);
+	printf("----1----\n");
+	tab = ft_setup(tabcoor, tmap, objet, taille);
+	printf("----2----\n");
+	tabcoor_free(tabcoor, tmap);
+	ft_putstr("----3----\n");
+	//ft_put_to_img(tab, img, tmap, taille);
+	tabpos_free(tab, tmap);
 	(void)img;
 }
 
@@ -81,18 +73,8 @@ void	ft_img(char *name)
 
 int	main(int argc, char **argv)
 {
-	int		**tabint;
-	t_pos	tmap;
-
-	ft_putstr("----0----\n");
 	if (argc == 0)
 		return (1);
-	tmap.y = ft_countn(ft_readmap(argv[1]), ' ', '\n');
-	tmap.x = ft_countn(ft_readmap(argv[1]), '\n', '\0');
-	printf("x = %i y = %i\n", tmap.x, tmap.y);
-	tabint = ft_maptrim(argv[1], tmap);
-	if (tabint == NULL)
-		return (0);
-	tabint_free(tabint, tmap);
+	ft_img(argv[1]);
 	return (0);
 }

@@ -2,7 +2,7 @@ NAME = fdf.out
 
 HEADERS = fdf.h
 
-SRCS = fdf.c fdf_utils.c ft_coord.c ft_free.c maptrim.c ft_mlx_event.c ft_point.c ft_putpixel.c \
+SRCS = fdf.c fdf_utils.c ft_coord.c ft_free.c ft_mlx_event.c ft_point.c ft_putpixel.c \
 		ft_split.c ft_splitnum.c ft_vect.c tab_utils.c ft_maptrim.c gnl.c gnl_utils.c
 
 OBJETS = ${SRCS:.c=.o}
@@ -11,11 +11,14 @@ CC = gcc
 
 FLAGS = -Wall -Werror -Wextra
 
+MLX = @printf "\n\t\t${B_CYAN}GENERATE mlx library ...\n\n${NONE}" && cd minilibx-linux && make
+
 %.o : %.c
-	${CC} ${FLAGS} -I/usr/local/include/mlx.h -c $< -o $@
+	${CC} ${FLAGS} -I. -c $< -o $@
 
 ${NAME}	 : ${OBJETS}
-		${CC} -o ${NAME} ${OBJETS} -lmlx -framework OpenGL -framework AppKit
+		${MLX}
+		@${CC} -o ${NAME} ${OBJETS} -L ./minilibx-linux -lmlx -lXext -lX11 -lm
 
 all: ${NAME}
 

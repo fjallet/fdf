@@ -59,12 +59,10 @@ static size_t	ft_countw(char const *s, char c)
 	size_t	i;
 	size_t	t;
 	size_t	count;
-	char	*s_temp;
 
 	i = 0;
 	t = 1;
 	count = 0;
-	s_temp = (char *)s;
 	while (s[i])
 	{
 		if (s[i] == c)
