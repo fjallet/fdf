@@ -93,13 +93,6 @@ t_2d	**ft_setup(t_coor **tab, char *name, t_coor objet, t_pos taille);
 char	**ft_split(char *s, char c);
 int		*ft_splitnum(char const *s, char c);
 
-//ft_maptrim.c
-//char	*ft_strjoin(char *old, char *src);
-//char	*ft_readmap(char *name);
-//int		**map_trim(char *name);
-//t_coor	**ft_mapstruct(int **tab, t_pos tmap);
-//t_coor	**ft_malloc_coor(t_pos tmap);
-
 //fdf_utils
 size_t	ft_strlen(char	*str);
 size_t	ft_strlenspe(char	**str);
