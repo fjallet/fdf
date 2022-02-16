@@ -31,7 +31,7 @@ t_pos	init_taille(void)
 {
 	t_pos	t;
 
-	t.x = 1080;
-	t.y = 1980;
+	t.x = 1980;
+	t.y = 1080;
 	return (t);
 }

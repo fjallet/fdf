@@ -44,7 +44,7 @@ t_coor	crea_x(t_coor objet, t_coor y_vecteur)
 {
 	t_coor	x_vecteur;
 
-	x_vecteur.y = 3;
+	x_vecteur.y = -3;
 	x_vecteur.x = objet.x - (y_vecteur.y * (objet.y - x_vecteur.y) \
 	/ y_vecteur.x);
 	x_vecteur.z = - (x_vecteur.x * (objet.x - y_vecteur.x) + x_vecteur.y * \

@@ -29,11 +29,6 @@ typedef struct s_data {
 	int		endian;
 }				t_data;
 
-typedef struct s_vars {
-	void	*mlx;
-	void	*win;
-}				t_vars;
-
 typedef struct s_coor {
 	float	x;
 	float	y;
@@ -50,13 +45,25 @@ typedef struct s_pos {
 	int	y;
 }				t_pos;
 
+typedef struct s_vars {
+	void	*mlx;
+	void	*win;
+	void	*img;
+	t_coor	**tab;
+	t_pos	ttab;
+	t_coor	objet;
+	t_pos	taille;
+
+}				t_vars;
+
 //fdf.c
-void	ft_printstruct(char *name, t_coor objet, t_pos taille, t_data img);
-void	ft_img(char *name);
+void	ft_printstruct(t_coor **tabc, t_coor objet, t_pos taille, t_data img);
+void	ft_img(char *name, t_coor **tab, t_pos ttab);
 int		main(int argc, char **argv);
 
 //ft_mlx_event.c
 int		close_window(int key, t_vars *vars);
+int		mouse_hook(int x, int y, t_vars *vars);
 
 //ft_putpixel
 int		ft_segment(t_pos a, t_pos b, t_data img, t_pos taille);

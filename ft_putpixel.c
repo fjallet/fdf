@@ -24,10 +24,10 @@ int	ft_segment(t_pos a, t_pos b, t_data img, t_pos taille)
 {
 	t_pos	s;
 
-	if (a.x < 0 || a.x > taille.x || a.y < 0 || a.y > taille.y)
+	/*if (a.x < 0 || a.x > taille.x || a.y < 0 || a.y > taille.y)
 		return (0);
 	if (b.x < 0 || b.x > taille.x || b.y < 0 || b.y > taille.y)
-		return (0);
+		return (0);*/
 	if (a.x < b.x)
 		s.x = 1;
 	else
@@ -37,6 +37,7 @@ int	ft_segment(t_pos a, t_pos b, t_data img, t_pos taille)
 	else
 		s.y = -1;
 	ft_soussegment(a, b, img, s);
+	(void)taille;
 	return (0);
 }
 

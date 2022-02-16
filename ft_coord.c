@@ -16,8 +16,8 @@ float	res_equa(t_coor A, t_coor a, t_coor u, t_coor v)
 {
 	float	t;
 
-	t = a.x - A.x + u.x * (A.z - a.z) / u.z + v.x * ((A.y - a.y) / v.y + \
-	u.y * (A.z - a.z) / u.z / v.y) / \
+	t = (a.x - A.x + u.x * (A.z - a.z) / u.z + v.x * ((A.y - a.y) / v.y + \
+	u.y * (A.z - a.z) / u.z / v.y)) / \
 	(A.x - A.z * u.x / u.z - A.y * v.x / v.y + v.x * A.z * u.y / u.z / v.y);
 	return (t);
 }
@@ -60,8 +60,8 @@ t_pos	**ft_remp(t_coor **tab, t_pos tmap, t_coor *vect, t_pos taille)
 		{
 			alphap = crea_alphap(tab[i][j], res_equa(tab[i][j], vect[3], \
 			vect[1], vect[2]));
-			ptab[i][j].x = ft_prop(vect[1], p, vect[3], alphap) * taille.x;
-			ptab[i][j].y = ft_prop(vect[2], p, vect[3], alphap) * taille.y;
+			ptab[i][j].x = ft_prop(vect[2], p, vect[3], alphap) * taille.x;
+			ptab[i][j].y = ft_prop(vect[1], p, vect[3], alphap) * taille.y;
 			j++;
 		}
 		i++;

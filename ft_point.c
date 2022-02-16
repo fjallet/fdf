@@ -49,8 +49,8 @@ t_coor	init_objet(void)
 {
 	t_coor	o;
 
-	o.x = 20;
-	o.y = 20;
-	o.z = -20;
+	o.x = 10;
+	o.y = 10;
+	o.z = -10;
 	return (o);
 }
