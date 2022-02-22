@@ -17,6 +17,7 @@ int	close_window(int key, t_vars *vars)
 	printf("%d ", key);
 	if (key == 65307)
 	{
+		tabcoor_free(vars->tab, vars->tmap);
 		mlx_destroy_display(vars->mlx);
 		free(vars->mlx);
 		mlx_destroy_window(vars->mlx, vars->win);
@@ -40,5 +41,19 @@ int	mouse_hook(int x, int y, t_vars *vars)
 	my_mlx_pixel_put(&img, x, y, 0x00FF0000);
 	mlx_put_image_to_window(vars->mlx, vars->win, img.img, 0, 0);
 	mlx_destroy_image(vars->mlx, img.img);
+	return (0);
+}
+
+int	rot_map(int key, t_vars *vars)
+{
+	if (key == 97)
+		vars.vert.x = 1;
+	if (key == 119)
+		vars.horz.x = 1;
+	if (key == 100)
+		vars.vert.y = 1;
+	if (key == 115)
+		vars.horz.y = 1;
+	(void)vars;
 	return (0);
 }

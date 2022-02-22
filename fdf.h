@@ -48,17 +48,18 @@ typedef struct s_pos {
 typedef struct s_vars {
 	void	*mlx;
 	void	*win;
-	void	*img;
+	t_data	img;
 	t_coor	**tab;
-	t_pos	ttab;
+	t_pos	tmap;
 	t_coor	objet;
-	t_pos	taille;
-
+	t_pos	twindow;
+	t_pos	vert;
+	t_pos	horz;
 }				t_vars;
 
 //fdf.c
-void	ft_printstruct(t_coor **tabc, t_coor objet, t_pos taille, t_data img);
-void	ft_img(char *name, t_coor **tab, t_pos ttab);
+void	ft_printstruct(t_vars vars);
+void	ft_img(t_vars *vars);
 int		main(int argc, char **argv);
 
 //ft_mlx_event.c

@@ -31,44 +31,41 @@ void	ft_putstr(char *str)
 	}
 }
 
-void	ft_printstruct(t_coor **tabc, t_coor objet, t_pos taille, t_data img)
+void	ft_printstruct(t_vars vars)
 {
-	t_pos	**tab;
-	t_pos	tmap;
+	t_pos	**tabpos;
 
-	tab = ft_setup(tabc, tmap, objet, taille);
-	tabcoor_free(tabc, tmap);
-	ft_put_to_img(tab, img, tmap, taille);
-	tabpos_free(tab, tmap);
+	tabpos = ft_setup(vars.tab, vars.tmap, vars.objet, vars.twindow);
+	ft_put_to_img(tabpos, vars.img, vars.tmap, vars.twindow);
+	mlx_put_image_to_window(vars.mlx, vars.win, vars.img.img, 0, 0);
+	mlx_destroy_image(vars.mlx, vars.img.img);
+	tabpos_free(tabpos, vars.tmap);
 }
 
-void	ft_img(char *name, t_coor **tab, t_pos ttab)
+void	ft_img(t_vars *vars)
 {
-	t_vars	vars;
-
-	vars.ttab = ttab;
-	vars.tab = tab;
-	vars.objet = init_objet();
-	vars.taille = init_taille();
-	vars.mlx = mlx_init();
-	if (!vars.mlx)
+	vars->mlx = mlx_init();
+	if (!vars->mlx)
 		return ;
-	vars.win = mlx_new_window(vars.mlx, vars.taille.x, vars.taille.y, "mlx 42");
+	vars->win = mlx_new_window(vars->mlx, vars->twindow.x, vars->twindow.y, "7");
 	//ft_printstruct(vars.tab, vars.objet, vars.taille, img);
 	//mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
-	mlx_hook(vars.win, 2, 1L << 0, close_window, &vars);
-	mlx_hook(vars.win, 6, 1L << 6, mouse_hook, &vars);
-	mlx_loop(vars.mlx);
-	(void)name;
+	mlx_hook(vars->win, 2, 1L << 0, close_window, vars);
+	mlx_hook(vars->win, 6, 1L << 6, mouse_hook, vars);
+	//mlx_hook(vars->win, 2, 1L << 0, rot_map, vars);
+	mlx_loop(vars->mlx);
 }
 
 int	main(int argc, char **argv)
 {
-	t_pos	tmap;
+	t_vars	vars;
 
 	if (argc == 0)
 		return (1);
-	tmap = ft_count(argv[1]);
-	ft_img(argv[1], ft_maptrim(argv[1], tmap), tmap);
+	vars.tmap = ft_count(argv[1]);
+	vars.tab = ft_maptrim(argv[1], vars.tmap);
+	vars.objet = init_objet();
+	vars.twindow = init_taille();
+	ft_img(&vars);
 	return (0);
 }
