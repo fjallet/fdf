@@ -44,15 +44,22 @@ void	ft_printstruct(t_vars vars)
 
 void	ft_img(t_vars *vars)
 {
+	t_data	img;
+
 	vars->mlx = mlx_init();
 	if (!vars->mlx)
 		return ;
 	vars->win = mlx_new_window(vars->mlx, vars->twindow.x, vars->twindow.y, "7");
+		img.img = mlx_new_image(vars->mlx, 1920, 1080);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, \
+	&img.line_length, &img.endian);
 	//ft_printstruct(vars.tab, vars.objet, vars.taille, img);
-	//mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
-	mlx_hook(vars->win, 2, 1L << 0, close_window, vars);
-	mlx_hook(vars->win, 6, 1L << 6, mouse_hook, vars);
-	//mlx_hook(vars->win, 2, 1L << 0, rot_map, vars);
+	mlx_hook(vars->win, 2, 1L << 0, keyboardpress, vars);
+	//mlx_hook(vars->win, 6, 1L << 6, mouse_hook, vars);
+	ft_rempiso(vars);
+	ft_put_to_img(vars->ptab, img, vars->tmap, vars->twindow);
+	mlx_put_image_to_window(vars->mlx, vars->win, img.img, 0, 0);
+	mlx_destroy_image(vars->mlx, img.img);
 	mlx_loop(vars->mlx);
 }
 
@@ -64,6 +71,7 @@ int	main(int argc, char **argv)
 		return (1);
 	vars.tmap = ft_count(argv[1]);
 	vars.tab = ft_maptrim(argv[1], vars.tmap);
+	vars.ptab = ft_mallocpos(vars.tmap);
 	vars.objet = init_objet();
 	vars.twindow = init_taille();
 	ft_img(&vars);

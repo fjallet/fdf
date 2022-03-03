@@ -36,10 +36,11 @@ t_pos	init_taille(void)
 	return (t);
 }
 
-t_coor	ft_rot(t_vars *vars)
+/*t_coor	ft_rot(t_vars *vars)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	float	n;
 
 	i = 0;
 	j = 0;
@@ -48,13 +49,13 @@ t_coor	ft_rot(t_vars *vars)
 		j = 0;
 		while (j <= vars->tmap.y)
 		{
-			vars->tab[i][j].z = cos(a)sqrtf(vars->tab[i][j].x * vars->tab[i][j].x +
-			 vars->tab[i][j].y * vars->tab[i][j].y + vars->tab[i][j].z + vars->tab[i][j].z);
-			vars->tab[i][j].y = sin(a)sqrtf(vars->tab[i][j].x * vars->tab[i][j].x +
+			n = sqrtf(vars->tab[i][j].x * vars->tab[i][j].x + vars->tab[i][j].y\
+			 * vars->tab[i][j].y + vars->tab[i][j].z + vars->tab[i][j].z);
+			vars->tab[i][j].z = pow(y, 3) * cos(+) / n - y * y * z * sin(+) / n;
+			vars->tab[i][j].y = sin(a) * sqrtf(vars->tab[i][j].x * vars->tab[i][j].x +
 			 vars->tab[i][j].y * vars->tab[i][j].y + vars->tab[i][j].z + vars->tab[i][j].z);
 			j++;
 		}
 		i++;
 	}
-	n = sqrtf(vect.x * vect.x + vect.y * vect.y + vect.z + vect.z);
-}
+}*/

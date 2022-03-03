@@ -51,8 +51,8 @@ t_coor	**ft_mapstruct(int **tab, t_pos tmap)
 		j = 0;
 		while (j < tmap.y)
 		{
-			tabstruct[i][j].x = j;
-			tabstruct[i][j].y = i;
+			tabstruct[i][j].x = j - tmap.x / 2;
+			tabstruct[i][j].y = i - tmap.y / 2;
 			tabstruct[i][j].z = tab[i][j];
 			j++;
 		}

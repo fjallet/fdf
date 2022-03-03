@@ -21,6 +21,12 @@
 
 # include <stdio.h>
 
+# define ESC 65307
+# define KEY_A 97
+# define KEY_D 100
+# define KEY_W 115
+# define KEY_S 119
+
 typedef struct s_data {
 	void	*img;
 	char	*addr;
@@ -50,11 +56,11 @@ typedef struct s_vars {
 	void	*win;
 	t_data	img;
 	t_coor	**tab;
+	t_pos	**ptab;
 	t_pos	tmap;
 	t_coor	objet;
 	t_pos	twindow;
-	t_pos	vert;
-	t_pos	horz;
+	t_pos	rot[2];
 }				t_vars;
 
 //fdf.c
@@ -63,8 +69,9 @@ void	ft_img(t_vars *vars);
 int		main(int argc, char **argv);
 
 //ft_mlx_event.c
-int		close_window(int key, t_vars *vars);
-int		mouse_hook(int x, int y, t_vars *vars);
+int		keyboardpress(int key, t_vars *vars);
+int		close_window(t_vars *vars);
+int		rot_map(int key, t_vars *vars);
 
 //ft_putpixel
 int		ft_segment(t_pos a, t_pos b, t_data img, t_pos taille);
@@ -75,6 +82,10 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 //tab_utils.c
 t_pos	**ft_mallocpos(t_pos tmap);
 t_pos	init_taille(void);
+
+//ft_iso.c
+t_pos	ft_proj_iso(t_coor c, t_vars vars);
+t_vars	*ft_rempiso(t_vars *vars);
 
 //ft_vect.c
 t_coor	crea_vect(t_coor a, t_coor b);

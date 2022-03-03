@@ -85,6 +85,7 @@ void	ft_put_to_img(t_pos **tabstruct, t_data img, t_pos tmap, t_pos taille)
 			ft_segment(tabstruct[i][j], tabstruct[i + 1][j], img, taille);
 			j++;
 		}
+		ft_segment(tabstruct[i][j], tabstruct[i + 1][j], img, taille);
 		i++;
 	}
 	j = 0;

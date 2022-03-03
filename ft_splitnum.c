@@ -42,8 +42,8 @@ t_coor	*ft_splitcoor(char *s, char c, int l, t_pos tmap)
 			i++;
 		if (s[i] != c && s[i])
 		{
-			tab[j].x = (float)l + 1;
-			tab[j].y = (float)j + 1;
+			tab[j].x = (float)l - tmap.x / 2;
+			tab[j].y = (float)j - tmap.y / 2;
 			tab[j].z = (float)ft_atoi(&s[i]);
 			i += ft_countchar(&s[i], c, j++);
 		}

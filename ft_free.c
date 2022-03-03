@@ -24,7 +24,7 @@ void	tabcoor_free(t_coor **tab, t_pos tmap)
 		j = 0;
 		while (j <= tmap.y)
 		{
-			printf("%f ", tab[i][j].z);
+			//printf("%f ", tab[i][j].z);
 			j++;
 		}
 		free(tab[i]);
@@ -45,11 +45,11 @@ void	tabpos_free(t_pos **tab, t_pos tmap)
 		j = 0;
 		while (j <= tmap.y)
 		{
-			printf("(%i ", tab[i][j].x);
-			printf("%i) ", tab[i][j].y);
+			//printf("(%i ", tab[i][j].x);
+			//printf("%i) ", tab[i][j].y);
 			j++;
 		}
-		printf("\n");
+		//printf("\n");
 		free(tab[i]);
 		i++;
 	}
