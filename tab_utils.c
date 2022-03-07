@@ -36,26 +36,23 @@ t_pos	init_taille(void)
 	return (t);
 }
 
-/*t_coor	ft_rot(t_vars *vars)
+void	tabposprint(t_pos **tab, t_pos tmap)
 {
-	int		i;
-	int		j;
-	float	n;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
-	while (i <= vars->tmap.x)
+	while (i <= tmap.x)
 	{
 		j = 0;
-		while (j <= vars->tmap.y)
+		while (j <= tmap.y)
 		{
-			n = sqrtf(vars->tab[i][j].x * vars->tab[i][j].x + vars->tab[i][j].y\
-			 * vars->tab[i][j].y + vars->tab[i][j].z + vars->tab[i][j].z);
-			vars->tab[i][j].z = pow(y, 3) * cos(+) / n - y * y * z * sin(+) / n;
-			vars->tab[i][j].y = sin(a) * sqrtf(vars->tab[i][j].x * vars->tab[i][j].x +
-			 vars->tab[i][j].y * vars->tab[i][j].y + vars->tab[i][j].z + vars->tab[i][j].z);
+			printf("(%i ", tab[i][j].x);
+			printf("%i) ", tab[i][j].y);
 			j++;
 		}
+		printf("\n");
 		i++;
 	}
-}*/
+}

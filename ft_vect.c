@@ -30,26 +30,26 @@ t_coor	crea_d(t_coor point, t_coor objet)
 	return (point);
 }
 
-t_coor	crea_y(t_coor objet)
-{
-	t_coor	y_vecteur;
-
-	y_vecteur.x = 3;
-	y_vecteur.y = -(objet.x * y_vecteur.x / objet.y);
-	y_vecteur.z = 0;
-	return (y_vecteur);
-}
-
-t_coor	crea_x(t_coor objet, t_coor y_vecteur)
+t_coor	crea_x(t_coor objet)
 {
 	t_coor	x_vecteur;
 
-	x_vecteur.y = -3;
-	x_vecteur.x = objet.x - (y_vecteur.y * (objet.y - x_vecteur.y) \
-	/ y_vecteur.x);
-	x_vecteur.z = - (x_vecteur.x * (objet.x - y_vecteur.x) + x_vecteur.y * \
-	(objet.y - y_vecteur.y) / objet.z);
+	x_vecteur.y = -3.0;
+	x_vecteur.x = -(objet.y * x_vecteur.y / objet.x);
+	x_vecteur.z = 0.0;
 	return (x_vecteur);
+}
+
+t_coor	crea_y(t_coor objet, t_coor x_vecteur)
+{
+	t_coor	y_vecteur;
+
+	y_vecteur.y = -3.0;
+	y_vecteur.x = objet.x - (x_vecteur.y * (objet.y - y_vecteur.y) \
+	/ x_vecteur.x);
+	y_vecteur.z = - (y_vecteur.x * (objet.x - x_vecteur.x) + y_vecteur.y * \
+	(objet.y - x_vecteur.y)) / objet.z;
+	return (y_vecteur);
 }
 
 t_coor	ortho(t_coor vect)

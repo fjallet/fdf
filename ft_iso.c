@@ -17,7 +17,7 @@ t_pos	ft_proj_iso(t_coor c, t_vars vars)
 	t_coor	a;
 
 	a = ft_propiso(c);
-	b.x = sqrt(2) / 2 * (a.x -a.y) + vars.twindow.x / 2;
+	b.x = - sqrt(2) / 2 * (a.x -a.y) + vars.twindow.x / 2;
 	b.y = - (sqrtf(2.0 / 3.0) * a.z) + (1 /sqrt(6) * (a.x + a.y)) + vars.twindow.y / 2;
 	return (b);
 }

@@ -17,8 +17,8 @@ t_coor	crea_p(t_pos t, t_coor u, t_coor v, t_coor a)
 	t_coor	p;
 	t_2d	tprop;
 
-	tprop.x = t.x / 500;
-	tprop.y = t.y / 500;
+	tprop.x = t.x / 500.0;
+	tprop.y = t.y / 500.0;
 	p.x = a.x + tprop.x * u.x + tprop.y * v.x;
 	p.y = a.y + tprop.x * u.y + tprop.y * v.y;
 	p.z = a.z + tprop.x * u.z + tprop.y * v.z;
@@ -29,19 +29,19 @@ t_coor	crea_alphap(t_coor a, float t)
 {
 	t_coor	alphap;
 
-	alphap.x = a.x * (t + 1);
-	alphap.y = a.y * (t + 1);
-	alphap.z = a.z * (t + 1);
+	alphap.x = a.x * (t + 1.0);
+	alphap.y = a.y * (t + 1.0);
+	alphap.z = a.z * (t + 1.0);
 	return (alphap);
 }
 
-t_coor	crea_alpha(t_coor u, t_coor o)
+t_coor	crea_alpha(t_coor u, float fov)
 {
 	t_coor	alpha;
 
-	alpha.x = o.x + u.x;
-	alpha.y = o.y + u.y;
-	alpha.z = o.z + u.z;
+	alpha.x = u.x * fov;
+	alpha.y = u.y * fov;
+	alpha.z = u.z * fov;
 	return (alpha);
 }
 
@@ -49,8 +49,8 @@ t_coor	init_objet(void)
 {
 	t_coor	o;
 
-	o.x = 10;
-	o.y = 10;
-	o.z = -10;
+	o.x = 50.0;
+	o.y = 50.0;
+	o.z = -50.0;
 	return (o);
 }

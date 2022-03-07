@@ -60,7 +60,10 @@ t_pos	ft_count(char *name)
 	tmap.y = count;
 	i = 0;
 	while (str != NULL && i++ >= 0)
+	{
 		str = get_next_line(fd, 1);
+		free(str);
+	}
 	tmap.x = i - 1;
 	close(fd);
 	return (tmap);

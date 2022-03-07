@@ -24,10 +24,6 @@ int	ft_segment(t_pos a, t_pos b, t_data img, t_pos taille)
 {
 	t_pos	s;
 
-	/*if (a.x < 0 || a.x > taille.x || a.y < 0 || a.y > taille.y)
-		return (0);
-	if (b.x < 0 || b.x > taille.x || b.y < 0 || b.y > taille.y)
-		return (0);*/
 	if (a.x < b.x)
 		s.x = 1;
 	else
@@ -54,9 +50,10 @@ void	ft_soussegment(t_pos a, t_pos b, t_data img, t_pos s)
 		e = dx / 2;
 	else
 		e = -dy / 2;
-	while (a.x != b.x && a.y != b.y)
+	while (a.x != b.x || a.y != b.y)
 	{	
-		my_mlx_pixel_put(&img, a.x, a.y, 0x00FF0000);
+		if (0 <= a.x && a.x <= 1980 && 0 <= a.y && a.y <= 1080)
+			my_mlx_pixel_put(&img, a.x, a.y, 0x00FF0000);
 		e2 = e;
 		if (e2 > -dx)
 			e -= dy;

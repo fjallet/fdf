@@ -22,10 +22,15 @@
 # include <stdio.h>
 
 # define ESC 65307
+# define RESET 114
 # define KEY_A 97
 # define KEY_D 100
 # define KEY_W 115
 # define KEY_S 119
+# define KEY_Q 113
+# define KEY_E 101
+# define ISO 105
+# define PERSPECTIVE 112
 
 typedef struct s_data {
 	void	*img;
@@ -61,6 +66,8 @@ typedef struct s_vars {
 	t_coor	objet;
 	t_pos	twindow;
 	t_pos	rot[2];
+	int		proj;
+	char	*name;
 }				t_vars;
 
 //fdf.c
@@ -72,6 +79,10 @@ int		main(int argc, char **argv);
 int		keyboardpress(int key, t_vars *vars);
 int		close_window(t_vars *vars);
 int		rot_map(int key, t_vars *vars);
+int		render_next_frame(t_vars *vars);
+
+//ft_img_utils.c
+void	ft_reset_img(t_vars vars, t_data img);
 
 //ft_putpixel
 int		ft_segment(t_pos a, t_pos b, t_data img, t_pos taille);
@@ -82,6 +93,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 //tab_utils.c
 t_pos	**ft_mallocpos(t_pos tmap);
 t_pos	init_taille(void);
+void	tabposprint(t_pos **tab, t_pos tmap);
 
 //ft_iso.c
 t_pos	ft_proj_iso(t_coor c, t_vars vars);
@@ -90,14 +102,14 @@ t_vars	*ft_rempiso(t_vars *vars);
 //ft_vect.c
 t_coor	crea_vect(t_coor a, t_coor b);
 t_coor	crea_d(t_coor point, t_coor objet);
-t_coor	crea_y(t_coor objet);
-t_coor	crea_x(t_coor objet, t_coor y_vecteur);
+t_coor	crea_x(t_coor objet);
+t_coor	crea_y(t_coor objet, t_coor y_vecteur);
 t_coor	ortho(t_coor vect);
 
 //ft_point.c
 t_coor	crea_p(t_pos t, t_coor u, t_coor v, t_coor a);
 t_coor	crea_alphap(t_coor a, float t);
-t_coor	crea_alpha(t_coor u, t_coor o);
+t_coor	crea_alpha(t_coor u, float fov);
 t_coor	init_objet(void);
 
 //ft_coord.c
@@ -105,7 +117,7 @@ float	res_equa(t_coor A, t_coor a, t_coor u, t_coor v);
 float	ft_scalaire(t_coor a, t_coor b);
 float	ft_prop(t_coor u, t_coor P, t_coor alpha, t_coor alphap);
 t_pos	**ft_remp(t_coor **tab, t_pos tmap, t_coor *vect, t_pos taille);
-t_pos	**ft_setup(t_coor **tab, t_pos tmap, t_coor objet, t_pos taille);
+void	ft_setup(t_vars *vars);
 
 //ft_split
 t_coor	*ft_splitcoor(char *s, char c, int l, t_pos tmap);
