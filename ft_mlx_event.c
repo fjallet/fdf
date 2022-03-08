@@ -14,7 +14,6 @@
 
 int	keyboardpress(int key, t_vars *vars)
 {
-	//printf("%i ", key);
 	if (key == ESC)
 		close_window(vars);
 	if (key == KEY_A || key == KEY_S || key == KEY_D || key == KEY_W || \
@@ -29,14 +28,15 @@ int	keyboardpress(int key, t_vars *vars)
 	if (key == PERSPECTIVE)
 	{
 		vars->proj = 1;
-		tabcoor_free(vars->tab, vars->tmap);
-		vars->tab = ft_maptrim(vars->name, vars->tmap);
+		ft_reset_perspective(vars);
 	}
-	if (key == RESET)
+	if (key == RESET && vars->proj == 0)
 	{
 		tabcoor_free(vars->tab, vars->tmap);
 		vars->tab = ft_maptrim(vars->name, vars->tmap);
 	}
+	if (key == RESET && vars->proj == 1)
+		ft_reset_perspective(vars);
 	return(0);
 }
 
@@ -50,79 +50,6 @@ int	close_window(t_vars *vars)
 	free(vars->mlx);
 	exit(0);
 	return (0);
-}
-
-void	rot_x(t_vars *vars, float a)
-{
-	int		j;
-	int		i;
-	float	z;
-	float	y;
-	
-	i = 0;
-	j = 0;
-	while (i <= vars->tmap.x)
-	{
-		j = 0;
-		while (j <= vars->tmap.y)
-		{
-			z = vars->tab[i][j].z;
-			y = vars->tab[i][j].y;
-			vars->tab[i][j].y = cosf(a) * y - sinf(a) * z;
-			vars->tab[i][j].z = sinf(a) * y + cosf(a) * z;
-			j++;
-		}
-		i++;
-	}
-}
-
-void	rot_y(t_vars *vars, float a)
-{
-	int		j;
-	int		i;
-	float	z;
-	float	x;
-	
-	i = 0;
-	j = 0;
-	while (i <= vars->tmap.x)
-	{
-		j = 0;
-		while (j <= vars->tmap.y)
-		{
-			z = vars->tab[i][j].z;
-			x = vars->tab[i][j].x;
-			vars->tab[i][j].z = cosf(a) * z - sinf(a) * x;
-			vars->tab[i][j].x = sinf(a) * z + cosf(a) * x;
-			j++;
-		}
-		i++;
-	}
-}
-
-void	rot_z(t_vars *vars, float a)
-{
-	int		j;
-	int		i;
-	float	x;
-	float	y;
-	
-	i = 0;
-	j = 0;
-	while (i <= vars->tmap.x)
-	{
-		j = 0;
-		while (j <= vars->tmap.y)
-		{
-			x = vars->tab[i][j].x;
-			y = vars->tab[i][j].y;
-			vars->tab[i][j].x = cosf(a) * x - sinf(a) * y;
-			vars->tab[i][j].y = sinf(a) * x + cosf(a) * y;
-			j++;
-		}
-		
-		i++;
-	}
 }
 
 int	rot_map(int key, t_vars *vars)
@@ -142,7 +69,6 @@ int	rot_map(int key, t_vars *vars)
 		rot_y(vars, a);
 	if (key == KEY_S)
 		rot_y(vars, -a);
-	//printf("%f",cosf(a));
 	return (0);
 }
 
@@ -153,7 +79,7 @@ int	render_next_frame(t_vars *vars)
 		ft_rempiso(vars);
 	if (vars->proj == 1)
 		ft_setup(vars);
-	ft_put_to_img(vars->ptab, vars->img, vars->tmap, vars->twindow);
+	ft_put_to_img(*vars);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
 	return (0);
 }

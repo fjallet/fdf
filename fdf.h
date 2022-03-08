@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 14:50:29 by fjallet           #+#    #+#             */
-/*   Updated: 2022/02/09 17:58:22 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/03/08 18:04:35 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,12 @@ typedef struct s_vars {
 	t_coor	**tab;
 	t_pos	**ptab;
 	t_pos	tmap;
-	t_coor	objet;
 	t_pos	twindow;
 	t_pos	rot[2];
 	int		proj;
 	char	*name;
+	float	tplan;
+	float	zoom;
 }				t_vars;
 
 //fdf.c
@@ -81,13 +82,19 @@ int		close_window(t_vars *vars);
 int		rot_map(int key, t_vars *vars);
 int		render_next_frame(t_vars *vars);
 
+//ft_mlx_event_utils.c
+void	rot_x(t_vars *vars, float a);
+void	rot_y(t_vars *vars, float a);
+void	rot_z(t_vars *vars, float a);
+void	ft_reset_perspective(t_vars *vars);
+
 //ft_img_utils.c
 void	ft_reset_img(t_vars vars, t_data img);
 
 //ft_putpixel
-int		ft_segment(t_pos a, t_pos b, t_data img, t_pos taille);
-void	ft_soussegment(t_pos a, t_pos b, t_data img, t_pos s);
-void	ft_put_to_img(t_pos **tabstruct, t_data img, t_pos tmap, t_pos taille);
+void	ft_segment(t_pos a, t_pos b, t_vars vars);
+void	ft_soussegment(t_pos a, t_pos b, t_vars vars, t_pos s);
+void	ft_put_to_img(t_vars vars);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 //tab_utils.c
@@ -107,16 +114,15 @@ t_coor	crea_y(t_coor objet, t_coor y_vecteur);
 t_coor	ortho(t_coor vect);
 
 //ft_point.c
-t_coor	crea_p(t_pos t, t_coor u, t_coor v, t_coor a);
-t_coor	crea_alphap(t_coor a, float t);
-t_coor	crea_alpha(t_coor u, float fov);
+t_coor	crea_p(float tprop, t_coor a);
+t_coor	crea_alphap(t_coor A, t_coor a, float t);
+t_coor	crea_alpha(float zoom);
 t_coor	init_objet(void);
 
 //ft_coord.c
-float	res_equa(t_coor A, t_coor a, t_coor u, t_coor v);
 float	ft_scalaire(t_coor a, t_coor b);
 float	ft_prop(t_coor u, t_coor P, t_coor alpha, t_coor alphap);
-t_pos	**ft_remp(t_coor **tab, t_pos tmap, t_coor *vect, t_pos taille);
+void	ft_remp(t_vars *vars, t_coor *vect);
 void	ft_setup(t_vars *vars);
 
 //ft_split
