@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:14:31 by fjallet           #+#    #+#             */
-/*   Updated: 2022/03/08 18:44:30 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/03/09 14:34:12 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,16 @@ void	ft_remp(t_vars *vars, t_coor *vect)
 		while (j <= vars->tmap.y)
 		{
 			res = vect[2].x / (vars->tab[i][j].x + vars->zoom);
-			printf("%f\n", res);
+			//printf("%f\n", res);
 			alphap = crea_alphap(vars->tab[i][j], vect[2], res);
-			printf("%f %f %f\n", vars->tab[i][j].x, vars->tab[i][j].y, vars->tab[i][j].z);
+			//printf("%f %f %f\n", vars->tab[i][j].x, vars->tab[i][j].y, vars->tab[i][j].z);
 			vars->ptab[i][j].x = ((alphap.y + vars->tplan) / (vars->tplan * 2.0)) * vars->twindow.x;
 			vars->ptab[i][j].y = ((alphap.z - vars->tplan) / (vars->tplan * -2.0)) * vars->twindow.y;
 			j++;
 		}
 		i++;
 	}
-	tabposprint(vars->ptab, vars->tmap);
+	//tabposprint(vars->ptab, vars->tmap);
 }
 
 void	ft_setup(t_vars *vars)
@@ -66,7 +66,7 @@ void	ft_setup(t_vars *vars)
 
 	fov = 2.0;
 	vars->zoom = 20.0;
-	vars->tplan = 15.0;
+	vars->tplan = 10.0;
 	vect[0].x = 0.0;
 	vect[0].y = 1.0;
 	vect[0].z = 0.0;

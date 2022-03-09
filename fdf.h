@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 14:50:29 by fjallet           #+#    #+#             */
-/*   Updated: 2022/03/08 18:04:35 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/03/09 17:56:09 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_vars {
 	void	*win;
 	t_data	img;
 	t_coor	**tab;
+	t_coor	local;
 	t_pos	**ptab;
 	t_pos	tmap;
 	t_pos	twindow;
@@ -87,6 +88,7 @@ void	rot_x(t_vars *vars, float a);
 void	rot_y(t_vars *vars, float a);
 void	rot_z(t_vars *vars, float a);
 void	ft_reset_perspective(t_vars *vars);
+void	ft_reset_isometrique(t_vars *vars);
 
 //ft_img_utils.c
 void	ft_reset_img(t_vars vars, t_data img);
@@ -101,6 +103,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 t_pos	**ft_mallocpos(t_pos tmap);
 t_pos	init_taille(void);
 void	tabposprint(t_pos **tab, t_pos tmap);
+t_coor	init_coor(void);
 
 //ft_iso.c
 t_pos	ft_proj_iso(t_coor c, t_vars vars);

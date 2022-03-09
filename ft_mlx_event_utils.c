@@ -75,6 +75,14 @@ void	rot_z(t_vars *vars, float a)
 
 void	ft_reset_perspective(t_vars *vars)
 {
+	vars->proj = 1;
+	tabcoor_free(vars->tab, vars->tmap);
+	vars->tab = ft_maptrim(vars->name, vars->tmap);
+}
+
+void	ft_reset_isometrique(t_vars *vars)
+{
+	vars->proj = 0;
 	tabcoor_free(vars->tab, vars->tmap);
 	vars->tab = ft_maptrim(vars->name, vars->tmap);
 }

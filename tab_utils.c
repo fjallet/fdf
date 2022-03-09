@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 11:40:05 by fjallet           #+#    #+#             */
-/*   Updated: 2022/02/09 17:46:56 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/03/09 14:33:41 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,14 @@ void	tabposprint(t_pos **tab, t_pos tmap)
 		printf("\n");
 		i++;
 	}
+}
+
+t_coor	init_coor(void)
+{
+	t_coor	a;
+	
+	a.x = 0.0;
+	a.y = 0.0;
+	a.z = 0.0;
+	return (a);
 }

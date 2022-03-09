@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 11:53:09 by fjallet           #+#    #+#             */
-/*   Updated: 2022/02/09 14:21:50 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/03/09 17:55:59 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,11 @@ int	keyboardpress(int key, t_vars *vars)
 	key == KEY_Q || key == KEY_E)
 		rot_map(key, vars);
 	if (key == ISO)
-	{
-		vars->proj = 0;
-		tabcoor_free(vars->tab, vars->tmap);
-		vars->tab = ft_maptrim(vars->name, vars->tmap);
-	}
+		ft_reset_isometrique(vars);
 	if (key == PERSPECTIVE)
-	{
-		vars->proj = 1;
 		ft_reset_perspective(vars);
-	}
 	if (key == RESET && vars->proj == 0)
-	{
-		tabcoor_free(vars->tab, vars->tmap);
-		vars->tab = ft_maptrim(vars->name, vars->tmap);
-	}
+		ft_reset_isometrique(vars);
 	if (key == RESET && vars->proj == 1)
 		ft_reset_perspective(vars);
 	return(0);
@@ -56,7 +46,7 @@ int	rot_map(int key, t_vars *vars)
 {
 	float	a;
 
-	a = 0.05;
+	a = M_PI / 32;
 	if (key == KEY_E)
 		rot_x(vars, a);
 	if (key == KEY_D)
