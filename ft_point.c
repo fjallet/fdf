@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:14:41 by fjallet           #+#    #+#             */
-/*   Updated: 2022/03/08 18:02:04 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/03/11 12:09:19 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ t_coor	crea_p(float tprop, t_coor a)
 	return (p);
 }
 
-t_coor	crea_alphap(t_coor A, t_coor a, float t)
+t_coor	crea_alphap(t_coor A, t_coor a, float t, t_vars *vars)
 {
 	t_coor	alphap;
 
 	alphap.x = a.x;
-	alphap.y = A.y * (t + 1.0);
-	alphap.z = A.z * (t + 1.0);
+	alphap.y = (A.y + vars->local.y) * (t + 1.0);
+	alphap.z = (A.z + vars->local.z) * (t + 1.0);
 	return (alphap);
 }
 

@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 15:49:55 by fjallet           #+#    #+#             */
-/*   Updated: 2022/03/08 18:38:37 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/03/11 17:05:16 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	ft_segment(t_pos a, t_pos b, t_vars vars)
 {
 	t_pos	s;
 
+	//if (a.bo == 0 || b.bo == 0)
+	//	return;
 	if (a.x < b.x)
 		s.x = 1;
 	else
@@ -71,10 +73,10 @@ void	ft_put_to_img(t_vars vars)
 
 	i = 0;
 	j = 0;
-	while (i < vars.tmap.x)
+	while (i < vars.tmap.x - 1)
 	{
 		j = 0;
-		while (j < vars.tmap.y)
+		while (j < vars.tmap.y - 1)
 		{
 			ft_segment(vars.ptab[i][j], vars.ptab[i][j + 1], vars);
 			ft_segment(vars.ptab[i][j], vars.ptab[i + 1][j], vars);
@@ -84,7 +86,7 @@ void	ft_put_to_img(t_vars vars)
 		i++;
 	}
 	j = 0;
-	while (j < vars.tmap.y)
+	while (j < vars.tmap.y - 1)
 	{
 		ft_segment(vars.ptab[i][j], vars.ptab[i][j + 1], vars);
 		j++;

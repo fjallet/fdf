@@ -1,12 +1,12 @@
 #include <fdf.h>
 
-t_coor	ft_propiso(t_coor c)
+t_coor	ft_propiso(t_coor c, t_vars vars)
 {
 	t_coor	a;
 
-	a.x = c.x * 50;
-	a.y = c.y * 50;
-	a.z = c.z * 50;
+	a.x = (c.x + vars.local.x) * 50;
+	a.y = (c.y + vars.local.y) * 50;
+	a.z = (c.z + vars.local.z) * 50;
 	//printf("%f %f %f\n",a.x ,a.y ,a.z);
 	return (a);
 }
@@ -16,7 +16,7 @@ t_pos	ft_proj_iso(t_coor c, t_vars vars)
 	t_pos	b;
 	t_coor	a;
 
-	a = ft_propiso(c);
+	a = ft_propiso(c, vars);
 	b.x = - sqrt(2) / 2 * (a.x -a.y) + vars.twindow.x / 2;
 	b.y = - (sqrtf(2.0 / 3.0) * a.z) + (1 /sqrt(6) * (a.x + a.y)) + vars.twindow.y / 2;
 	return (b);
@@ -28,10 +28,10 @@ t_vars	*ft_rempiso(t_vars *vars)
 	int		j;
 
 	i = 0;
-	while (i <= vars->tmap.x)
+	while (i < vars->tmap.x)
 	{
 		j = 0;
-		while (j <= vars->tmap.y)
+		while (j < vars->tmap.y)
 		{
 			vars->ptab[i][j] = ft_proj_iso(vars->tab[i][j], *vars);
 			j++;

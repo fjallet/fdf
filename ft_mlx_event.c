@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 11:53:09 by fjallet           #+#    #+#             */
-/*   Updated: 2022/03/09 17:55:59 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/03/11 16:07:28 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 int	keyboardpress(int key, t_vars *vars)
 {
+	//printf("%i\n", key);
 	if (key == ESC)
 		close_window(vars);
 	if (key == KEY_A || key == KEY_S || key == KEY_D || key == KEY_W || \
 	key == KEY_Q || key == KEY_E)
 		rot_map(key, vars);
+	if (key == KEY_UP || key == KEY_DOWN || key == KEY_RIGHT || key == KEY_LEFT)
+		trans_map(key, vars);
 	if (key == ISO)
 		ft_reset_isometrique(vars);
 	if (key == PERSPECTIVE)
@@ -32,11 +35,15 @@ int	keyboardpress(int key, t_vars *vars)
 
 int	close_window(t_vars *vars)
 {
+	get_next_line(vars->fd, 2, 1);
 	tabcoor_free(vars->tab, vars->tmap);
 	tabpos_free(vars->ptab, vars->tmap);
-	mlx_destroy_image(vars->mlx, vars->img.img);
-	mlx_destroy_display(vars->mlx);
-	mlx_destroy_window(vars->mlx, vars->win);
+	if (vars->mlx && vars->img.img)
+		mlx_destroy_image(vars->mlx, vars->img.img);
+	if (vars->mlx && vars->win)
+		mlx_destroy_window(vars->mlx, vars->win);
+	if (vars->mlx)
+		mlx_destroy_display(vars->mlx);
 	free(vars->mlx);
 	exit(0);
 	return (0);
@@ -59,6 +66,19 @@ int	rot_map(int key, t_vars *vars)
 		rot_y(vars, a);
 	if (key == KEY_S)
 		rot_y(vars, -a);
+	return (0);
+}
+
+int trans_map(int key, t_vars *vars)
+{
+	if (key == KEY_UP)
+		vars->local.z += 1;
+	if (key == KEY_DOWN)
+		vars->local.z -= 1;
+	if (key == KEY_LEFT)
+		vars->local.y -= 1;
+	if (key == KEY_RIGHT)
+		vars->local.y += 1;
 	return (0);
 }
 

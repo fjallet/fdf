@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 11:40:05 by fjallet           #+#    #+#             */
-/*   Updated: 2022/03/09 14:33:41 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/03/11 16:52:44 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ t_pos	**ft_mallocpos(t_pos tmap)
 	t_pos	**tab;
 
 	i = 0;
-	tab = malloc(sizeof(t_pos *) * tmap.x);
-	while (i <= tmap.x)
+	tab = malloc(sizeof(t_pos *) * (tmap.x + 1));
+	while (i < tmap.x)
 	{
-		tab[i] = malloc(sizeof(t_pos) * tmap.y);
+		tab[i] = malloc(sizeof(t_pos) * (tmap.y + 1));
 		i++;
 	}
 	return (tab);
@@ -31,8 +31,8 @@ t_pos	init_taille(void)
 {
 	t_pos	t;
 
-	t.x = 1980;
-	t.y = 1080;
+	t.x = 1000;
+	t.y = 1000;
 	return (t);
 }
 
@@ -65,4 +65,12 @@ t_coor	init_coor(void)
 	a.y = 0.0;
 	a.z = 0.0;
 	return (a);
+}
+
+void	init_cos(t_vars *vars, float fov)
+{
+	float	n;
+
+	n = sqrtf(pow(fov, 2.0) + pow(vars->tplan, 2.0));
+	vars->cos = fov / n;
 }

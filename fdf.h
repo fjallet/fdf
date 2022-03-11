@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 14:50:29 by fjallet           #+#    #+#             */
-/*   Updated: 2022/03/09 17:56:09 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/03/11 16:43:23 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@
 # define KEY_S 119
 # define KEY_Q 113
 # define KEY_E 101
+# define KEY_UP 65362
+# define KEY_LEFT 65361
+# define KEY_DOWN 65364
+# define KEY_RIGHT 65363
 # define ISO 105
 # define PERSPECTIVE 112
 
@@ -54,6 +58,7 @@ typedef struct s_2d {
 typedef struct s_pos {
 	int	x;
 	int	y;
+	int bo;
 }				t_pos;
 
 typedef struct s_vars {
@@ -69,7 +74,8 @@ typedef struct s_vars {
 	int		proj;
 	char	*name;
 	float	tplan;
-	float	zoom;
+	float	cos;
+	int		fd;
 }				t_vars;
 
 //fdf.c
@@ -82,6 +88,7 @@ int		keyboardpress(int key, t_vars *vars);
 int		close_window(t_vars *vars);
 int		rot_map(int key, t_vars *vars);
 int		render_next_frame(t_vars *vars);
+int 	trans_map(int key, t_vars *vars);
 
 //ft_mlx_event_utils.c
 void	rot_x(t_vars *vars, float a);
@@ -104,21 +111,19 @@ t_pos	**ft_mallocpos(t_pos tmap);
 t_pos	init_taille(void);
 void	tabposprint(t_pos **tab, t_pos tmap);
 t_coor	init_coor(void);
+void	init_cos(t_vars *vars, float fov);
 
 //ft_iso.c
+t_coor	ft_propiso(t_coor c, t_vars vars);
 t_pos	ft_proj_iso(t_coor c, t_vars vars);
 t_vars	*ft_rempiso(t_vars *vars);
 
 //ft_vect.c
 t_coor	crea_vect(t_coor a, t_coor b);
-t_coor	crea_d(t_coor point, t_coor objet);
-t_coor	crea_x(t_coor objet);
-t_coor	crea_y(t_coor objet, t_coor y_vecteur);
-t_coor	ortho(t_coor vect);
 
 //ft_point.c
 t_coor	crea_p(float tprop, t_coor a);
-t_coor	crea_alphap(t_coor A, t_coor a, float t);
+t_coor	crea_alphap(t_coor A, t_coor a, float t, t_vars *vars);
 t_coor	crea_alpha(float zoom);
 t_coor	init_objet(void);
 
@@ -127,9 +132,6 @@ float	ft_scalaire(t_coor a, t_coor b);
 float	ft_prop(t_coor u, t_coor P, t_coor alpha, t_coor alphap);
 void	ft_remp(t_vars *vars, t_coor *vect);
 void	ft_setup(t_vars *vars);
-
-//ft_split
-t_coor	*ft_splitcoor(char *s, char c, int l, t_pos tmap);
 
 //fdf_utils
 int		ft_atoi(const char *str);
@@ -144,10 +146,9 @@ void	ft_putchar(char c);
 void	ft_putstr(char *str);
 
 //newmaptrim
-t_coor	**ft_maptrim(char *name, t_pos tmap);
-t_coor	**ft_mapstruct(int **tab, t_pos tmap);
-t_coor	**ft_malloc_coor(t_pos tmap);
-char	*ft_readmap(char *name);
+t_coor	*ft_splitcoor(char *s, char c, int l, t_pos tmap);
+t_coor	**ft_maptrim(char *name, t_pos tmap, t_vars *vars);
+
 
 //gnl
 size_t	ft_strlen(char *s);
@@ -157,7 +158,7 @@ char	*ft_strtrim1(char *old);
 char	*ft_strtrim2(char *old);
 char	*ft_strdup(char *s1);
 size_t	ft_strchr(char *s, char c);
-char	*get_next_line(int fd, int id);
+char	*get_next_line(int fd, int id, int leak);
 int		ft_endfree(char *rst);
 
 #endif
