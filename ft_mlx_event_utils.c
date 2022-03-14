@@ -1,11 +1,9 @@
 #include "fdf.h"
 
-void	rot_x(t_vars *vars, float a)
+void	rot_all(t_vars *vars, float a, char c)
 {
 	int		j;
 	int		i;
-	float	z;
-	float	y;
 	
 	i = 0;
 	j = 0;
@@ -14,58 +12,12 @@ void	rot_x(t_vars *vars, float a)
 		j = 0;
 		while (j < vars->tmap.y)
 		{
-			z = vars->tab[i][j].z;
-			y = vars->tab[i][j].y;
-			vars->tab[i][j].y = cosf(a) * y - sinf(a) * z;
-			vars->tab[i][j].z = sinf(a) * y + cosf(a) * z;
-			j++;
-		}
-		i++;
-	}
-}
-
-void	rot_y(t_vars *vars, float a)
-{
-	int		j;
-	int		i;
-	float	z;
-	float	x;
-	
-	i = 0;
-	j = 0;
-	while (i < vars->tmap.x)
-	{
-		j = 0;
-		while (j < vars->tmap.y)
-		{
-			z = vars->tab[i][j].z;
-			x = vars->tab[i][j].x;
-			vars->tab[i][j].z = cosf(a) * z - sinf(a) * x;
-			vars->tab[i][j].x = sinf(a) * z + cosf(a) * x;
-			j++;
-		}
-		i++;
-	}
-}
-
-void	rot_z(t_vars *vars, float a)
-{
-	int		j;
-	int		i;
-	float	x;
-	float	y;
-	
-	i = 0;
-	j = 0;
-	while (i < vars->tmap.x)
-	{
-		j = 0;
-		while (j < vars->tmap.y)
-		{
-			x = vars->tab[i][j].x;
-			y = vars->tab[i][j].y;
-			vars->tab[i][j].x = cosf(a) * x - sinf(a) * y;
-			vars->tab[i][j].y = sinf(a) * x + cosf(a) * y;
+			if (c == 'z')
+				rot_switch(&vars->tab[i][j].x, &vars->tab[i][j].y, a);
+			if (c == 'y')
+				rot_switch(&vars->tab[i][j].z, &vars->tab[i][j].x, a);
+			if (c == 'x')
+				rot_switch(&vars->tab[i][j].y, &vars->tab[i][j].z, a);
 			j++;
 		}
 		
@@ -73,15 +25,36 @@ void	rot_z(t_vars *vars, float a)
 	}
 }
 
+void	rot_switch(float *a, float *b, float alpha)
+{
+	float	ta;
+	float	tb;
+
+	ta = *a;
+	tb = *b;
+	*a = cosf(alpha) * ta - sinf(alpha) * tb;
+	*b = sinf(alpha) * ta + cosf(alpha) * tb;
+}
+
+void	rot_plan(t_vars *vars, int key)
+{
+	float	a;
+
+	if (key == KEY_Q)
+		a = M_PI / 32;
+	else if (key == KEY_E)
+		a = M_PI / -32;
+	rot_switch(&vars->local.x, &vars->local.y, a);
+	rot_all(vars, a, 'z');
+}
+
 void	ft_reset_perspective(t_vars *vars)
 {
 	vars->proj = 1;
 	tabcoor_free(vars->tab, vars->tmap);
 	vars->tab = ft_maptrim(vars->name, vars->tmap, vars);
-	rot_y(vars, M_PI / 2);
-	rot_x(vars, M_PI / -16);
-	rot_z(vars, -M_PI / 5);
-	vars->local = init_coor();
+	rot_all(vars, (M_PI + M_PI/8) , 'y');
+	init_local(vars);
 	vars->local.x = 20.0;
 }
 

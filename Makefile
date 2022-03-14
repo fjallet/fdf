@@ -1,4 +1,4 @@
-NAME = 42.fdf
+NAME = fdf
 
 HEADERS = fdf.h
 

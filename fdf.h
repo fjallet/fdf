@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 14:50:29 by fjallet           #+#    #+#             */
-/*   Updated: 2022/03/11 16:43:23 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/03/14 17:50:56 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@
 
 # define ESC 65307
 # define RESET 114
+# define KEY_T 116
+# define KEY_Y 121
+# define KEY_U 117
+# define KEY_G 103
+# define KEY_H 104
+# define KEY_J 106
 # define KEY_A 97
 # define KEY_D 100
 # define KEY_W 115
@@ -91,9 +97,9 @@ int		render_next_frame(t_vars *vars);
 int 	trans_map(int key, t_vars *vars);
 
 //ft_mlx_event_utils.c
-void	rot_x(t_vars *vars, float a);
-void	rot_y(t_vars *vars, float a);
-void	rot_z(t_vars *vars, float a);
+void	rot_all(t_vars *vars, float a, char c);
+void	rot_switch(float *a, float *b, float alpha);
+void	rot_plan(t_vars *vars, int key);
 void	ft_reset_perspective(t_vars *vars);
 void	ft_reset_isometrique(t_vars *vars);
 
@@ -109,9 +115,9 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 //tab_utils.c
 t_pos	**ft_mallocpos(t_pos tmap);
 t_pos	init_taille(void);
-void	tabposprint(t_pos **tab, t_pos tmap);
+//void	tabcoorzprint(t_coor **tab, t_pos tmap);
+//void	tabposprint(t_pos **tab, t_pos tmap);
 t_coor	init_coor(void);
-void	init_cos(t_vars *vars, float fov);
 
 //ft_iso.c
 t_coor	ft_propiso(t_coor c, t_vars vars);
@@ -125,12 +131,12 @@ t_coor	crea_vect(t_coor a, t_coor b);
 t_coor	crea_p(float tprop, t_coor a);
 t_coor	crea_alphap(t_coor A, t_coor a, float t, t_vars *vars);
 t_coor	crea_alpha(float zoom);
-t_coor	init_objet(void);
+void	init_local(t_vars *vars);
 
 //ft_coord.c
 float	ft_scalaire(t_coor a, t_coor b);
 float	ft_prop(t_coor u, t_coor P, t_coor alpha, t_coor alphap);
-void	ft_remp(t_vars *vars, t_coor *vect);
+void	ft_remp(t_vars *vars, t_coor alpha);
 void	ft_setup(t_vars *vars);
 
 //fdf_utils

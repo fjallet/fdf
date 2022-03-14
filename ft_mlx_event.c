@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 11:53:09 by fjallet           #+#    #+#             */
-/*   Updated: 2022/03/11 16:07:28 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/03/14 17:50:55 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,14 @@ int	keyboardpress(int key, t_vars *vars)
 	//printf("%i\n", key);
 	if (key == ESC)
 		close_window(vars);
-	if (key == KEY_A || key == KEY_S || key == KEY_D || key == KEY_W || \
-	key == KEY_Q || key == KEY_E)
+	if (key == KEY_T || key == KEY_Y || key == KEY_U || key == KEY_G || \
+	key == KEY_H || key == KEY_J)
 		rot_map(key, vars);
-	if (key == KEY_UP || key == KEY_DOWN || key == KEY_RIGHT || key == KEY_LEFT)
+	if (key == KEY_UP || key == KEY_DOWN || key == KEY_D || key == KEY_A || \
+	key == KEY_W || key == KEY_S)
 		trans_map(key, vars);
+	if ((key == KEY_Q || key == KEY_E) && vars->proj == 1)
+		rot_plan(vars, key);
 	if (key == ISO)
 		ft_reset_isometrique(vars);
 	if (key == PERSPECTIVE)
@@ -54,30 +57,34 @@ int	rot_map(int key, t_vars *vars)
 	float	a;
 
 	a = M_PI / 32;
-	if (key == KEY_E)
-		rot_x(vars, a);
-	if (key == KEY_D)
-		rot_z(vars, a);
-	if (key == KEY_Q)
-		rot_x(vars, -a);
-	if (key == KEY_A)
-		rot_z(vars, -a);
-	if (key == KEY_W)
-		rot_y(vars, a);
-	if (key == KEY_S)
-		rot_y(vars, -a);
+	if (key == KEY_U)
+		rot_all(vars, -a, 'x');
+	if (key == KEY_T)
+		rot_all(vars, a, 'x');
+	if (key == KEY_G)
+		rot_all(vars, -a, 'z');
+	if (key == KEY_J)
+		rot_all(vars, a, 'z');
+	if (key == KEY_Y)
+		rot_all(vars, -a, 'y');
+	if (key == KEY_H)
+		rot_all(vars, a, 'y');
 	return (0);
 }
 
 int trans_map(int key, t_vars *vars)
 {
+	if (key == KEY_W)
+		vars->local.x += 1;
+	if (key == KEY_S)
+		vars->local.x -= 1;
 	if (key == KEY_UP)
-		vars->local.z += 1;
-	if (key == KEY_DOWN)
 		vars->local.z -= 1;
-	if (key == KEY_LEFT)
+	if (key == KEY_DOWN)
+		vars->local.z += 1;
+	if (key == KEY_A)
 		vars->local.y -= 1;
-	if (key == KEY_RIGHT)
+	if (key == KEY_D)
 		vars->local.y += 1;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 18:07:30 by fjallet           #+#    #+#             */
-/*   Updated: 2022/03/11 16:07:02 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/03/14 16:37:34 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	main(int argc, char **argv)
 	vars.proj = 0;
 	vars.local = init_coor();
 	vars.name = argv[1];
+	vars.local = init_coor();
 	ft_img(&vars);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 15:49:55 by fjallet           #+#    #+#             */
-/*   Updated: 2022/03/11 17:05:16 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/03/14 17:50:50 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	ft_segment(t_pos a, t_pos b, t_vars vars)
 {
 	t_pos	s;
 
-	//if (a.bo == 0 || b.bo == 0)
-	//	return;
+	if (vars.proj == 1 && (a.bo == 0 || b.bo == 0))
+		return;
 	if (a.x < b.x)
 		s.x = 1;
 	else
@@ -52,7 +52,7 @@ void	ft_soussegment(t_pos a, t_pos b, t_vars vars, t_pos s)
 		e = -dy / 2;
 	while (a.x != b.x || a.y != b.y)
 	{	
-		if (0 <= a.x && a.x <= vars.twindow.x && 0 <= a.y && a.y <= vars.twindow.y)
+		if (0 < a.x && a.x < vars.twindow.x && 0 < a.y && a.y < vars.twindow.y)
 			my_mlx_pixel_put(&vars.img, a.x, a.y, 0x00FF0000);
 		e2 = e;
 		if (e2 > -dx)
