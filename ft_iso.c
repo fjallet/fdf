@@ -1,13 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_iso.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/09 18:30:51 by fjallet           #+#    #+#             */
+/*   Updated: 2022/06/09 18:35:45 by fjallet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <fdf.h>
 
 t_coor	ft_propiso(t_coor c, t_vars vars)
 {
 	t_coor	a;
 
-	a.x = (c.x + vars.local.x) * 50;
-	a.y = (c.y + vars.local.y) * 50;
-	a.z = (c.z + vars.local.z) * 50;
-	//printf("%f %f %f\n",a.x ,a.y ,a.z);
+	a.x = (c.x + vars.local.x) * vars.propiso;
+	a.y = (c.y + vars.local.y) * vars.propiso;
+	a.z = (c.z + vars.local.z) * vars.propiso;
 	return (a);
 }
 
@@ -17,8 +28,9 @@ t_pos	ft_proj_iso(t_coor c, t_vars vars)
 	t_coor	a;
 
 	a = ft_propiso(c, vars);
-	b.x = - sqrt(2) / 2 * (a.x -a.y) + vars.twindow.x / 2;
-	b.y = - (sqrtf(2.0 / 3.0) * a.z) + (1 /sqrt(6) * (a.x + a.y)) + vars.twindow.y / 2;
+	b.x = -sqrt(2) / 2 * (a.x - a.y) + vars.twindow.x / 2;
+	b.y = - (sqrtf(2.0 / 3.0) * a.z) + (1 / sqrt(6) * (a.x + a.y)) \
+	+ vars.twindow.y / 2;
 	return (b);
 }
 

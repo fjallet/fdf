@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 11:53:09 by fjallet           #+#    #+#             */
-/*   Updated: 2022/03/14 17:50:55 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/06/09 18:39:02 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	keyboardpress(int key, t_vars *vars)
 	key == KEY_H || key == KEY_J)
 		rot_map(key, vars);
 	if (key == KEY_UP || key == KEY_DOWN || key == KEY_D || key == KEY_A || \
-	key == KEY_W || key == KEY_S)
+	key == KEY_W || key == KEY_S || key == PLUS || key == MINUS)
 		trans_map(key, vars);
 	if ((key == KEY_Q || key == KEY_E) && vars->proj == 1)
 		rot_plan(vars, key);
@@ -33,7 +33,7 @@ int	keyboardpress(int key, t_vars *vars)
 		ft_reset_isometrique(vars);
 	if (key == RESET && vars->proj == 1)
 		ft_reset_perspective(vars);
-	return(0);
+	return (0);
 }
 
 int	close_window(t_vars *vars)
@@ -72,20 +72,24 @@ int	rot_map(int key, t_vars *vars)
 	return (0);
 }
 
-int trans_map(int key, t_vars *vars)
+int	trans_map(int key, t_vars *vars)
 {
 	if (key == KEY_W)
 		vars->local.x += 1;
 	if (key == KEY_S)
 		vars->local.x -= 1;
 	if (key == KEY_UP)
-		vars->local.z -= 1;
-	if (key == KEY_DOWN)
 		vars->local.z += 1;
+	if (key == KEY_DOWN)
+		vars->local.z -= 1;
 	if (key == KEY_A)
-		vars->local.y -= 1;
-	if (key == KEY_D)
 		vars->local.y += 1;
+	if (key == KEY_D)
+		vars->local.y -= 1;
+	if (key == PLUS && vars->propiso < 50)
+		vars->propiso += 1;
+	if (key == MINUS && vars->propiso > 1)
+		vars->propiso -= 1;
 	return (0);
 }
 

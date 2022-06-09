@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 15:52:35 by fjallet           #+#    #+#             */
-/*   Updated: 2022/03/11 16:11:47 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/06/09 18:23:24 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,14 @@ int	ft_atoi(const char *str)
 t_pos	ft_count(char *name)
 {
 	int		i;
-	int		count;
 	t_pos	tmap;
 	char	*str;
 	int		fd;
 
-	i = 0;
-	count = 0;
 	fd = open(name, O_RDONLY);
 	str = get_next_line(fd, 1, 0);
-	while (str && str[i] != '\0' && str[i])
-	{
-		if (str[i] == ' ')
-			count++;
-		i++;
-	}
+	tmap.y = ft_subcount(str);
 	free(str);
-	tmap.y = count + 1;
 	i = 0;
 	while (str != NULL && i++ >= 0)
 	{
@@ -67,4 +58,20 @@ t_pos	ft_count(char *name)
 	tmap.x = i;
 	close(fd);
 	return (tmap);
+}
+
+int	ft_subcount(char *str)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (str && str[i] != '\0' && str[i])
+	{
+		if (str[i] == ' ' && i > 0 && str[i - 1] != ' ')
+			count++;
+		i++;
+	}
+	return (count + 1);
 }

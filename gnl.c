@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 19:40:02 by fjallet           #+#    #+#             */
-/*   Updated: 2022/03/11 16:04:39 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/06/09 18:51:39 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,16 @@ char	*ft_strdup(char *s1)
 	return (ptr);
 }
 
+int	ft_verifleak(int leak, char *rst)
+{
+	if (leak == 1)
+	{
+		free(rst);
+		return (1);
+	}
+	return (0);
+}
+
 char	*get_next_line(int fd, int id, int leak)
 {
 	int			bs;
@@ -64,11 +74,8 @@ char	*get_next_line(int fd, int id, int leak)
 	char		buf[11];
 
 	bs = 10;
-	if (leak == 1)
-	{
-		free(rst[id]);
-		return(NULL);
-	}
+	if (ft_verifleak(leak, rst[id]))
+		return (NULL);
 	if (!rst[id])
 		rst[id] = NULL;
 	while (ft_strchr(rst[id], '\n') == 0 && bs == 10)

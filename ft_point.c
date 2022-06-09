@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:14:41 by fjallet           #+#    #+#             */
-/*   Updated: 2022/03/14 16:25:47 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/03/15 12:53:00 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_coor	crea_alpha(float zoom)
 
 void	init_local(t_vars *vars)
 {
-	vars->local.x = 20.0;
+	vars->local.x = 100.0;
 	vars->local.y = 0.0;
 	vars->local.z = 0.0;
 }

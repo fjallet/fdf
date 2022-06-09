@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 15:48:33 by fjallet           #+#    #+#             */
-/*   Updated: 2022/03/11 16:05:44 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/06/09 18:27:47 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ void	tabcoor_free(t_coor **tab, t_pos tmap)
 	{
 		j = 0;
 		while (j < tmap.y)
-		{
-			//printf("%f ", tab[i][j].z);
 			j++;
-		}
 		free(tab[i]);
 		i++;
 	}
@@ -44,12 +41,7 @@ void	tabpos_free(t_pos **tab, t_pos tmap)
 	{
 		j = 0;
 		while (j < tmap.y)
-		{
-			//printf("(%i ", tab[i][j].x);
-			//printf("%i) ", tab[i][j].y);
 			j++;
-		}
-		//printf("\n");
 		free(tab[i]);
 		i++;
 	}

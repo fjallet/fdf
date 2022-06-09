@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 18:07:30 by fjallet           #+#    #+#             */
-/*   Updated: 2022/03/14 16:37:34 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/06/09 18:09:54 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	ft_img(t_vars *vars)
 	vars->mlx = mlx_init();
 	if (!vars->mlx)
 		return ;
-	vars->win = mlx_new_window(vars->mlx, vars->twindow.x, vars->twindow.y, "7");
+	vars->win = mlx_new_window(vars->mlx, vars->twindow.x, vars->twindow.y, \
+	"7");
 	img.img = mlx_new_image(vars->mlx, vars->twindow.x, vars->twindow.y);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, \
 	&img.line_length, &img.endian);
@@ -63,6 +64,7 @@ int	main(int argc, char **argv)
 	vars.local = init_coor();
 	vars.name = argv[1];
 	vars.local = init_coor();
+	vars.propiso = 20;
 	ft_img(&vars);
 	return (0);
 }

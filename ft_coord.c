@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:14:31 by fjallet           #+#    #+#             */
-/*   Updated: 2022/03/14 17:50:58 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/06/09 18:26:35 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,26 @@ void	ft_remp(t_vars *vars, t_coor alpha)
 	int		j;
 	float	res;
 	t_coor	alphap;
-	
-	i = 0;
-	while (i < vars->tmap.x)
+
+	i = -1;
+	while (++i < vars->tmap.x)
 	{
-		j = 0;
-		while (j < vars->tmap.y)
+		j = -1;
+		while (++j < vars->tmap.y)
 		{
-			res = alpha.x / (vars->tab[i][j].x + vars->local.x);
-			alphap = crea_alphap(vars->tab[i][j], alpha, res, vars);
-			if (vars->tab[i][j].x + vars->local.x < 1.0)
-				vars->ptab[i][j].bo = 0;
-			else
+			if (vars->tab[i][j].x + vars->local.x > 1.0)
+			{
+				res = alpha.x / (vars->tab[i][j].x + vars->local.x);
+				alphap = crea_alphap(vars->tab[i][j], alpha, res, vars);
+				vars->ptab[i][j].x = ((alphap.y + vars->tplan) / (vars->tplan \
+				* 2.0)) * vars->twindow.x;
+				vars->ptab[i][j].y = ((alphap.z + vars->tplan) / (vars->tplan \
+				* 2.0)) * vars->twindow.y;
 				vars->ptab[i][j].bo = 1;
-			vars->ptab[i][j].x = ((alphap.y + vars->tplan) / (vars->tplan * 2.0)) * vars->twindow.x;
-			vars->ptab[i][j].y = ((alphap.z + vars->tplan) / (vars->tplan * 2.0)) * vars->twindow.y;
-			j++;
+			}
+			else
+				vars->ptab[i][j].bo = 0;
 		}
-		i++;
 	}
 }
 

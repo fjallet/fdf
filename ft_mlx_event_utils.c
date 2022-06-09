@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_mlx_event_utils.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/09 18:36:56 by fjallet           #+#    #+#             */
+/*   Updated: 2022/06/09 18:38:01 by fjallet          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 void	rot_all(t_vars *vars, float a, char c)
 {
 	int		j;
 	int		i;
-	
+
 	i = 0;
 	j = 0;
 	while (i < vars->tmap.x)
@@ -20,7 +32,6 @@ void	rot_all(t_vars *vars, float a, char c)
 				rot_switch(&vars->tab[i][j].y, &vars->tab[i][j].z, a);
 			j++;
 		}
-		
 		i++;
 	}
 }
@@ -53,13 +64,14 @@ void	ft_reset_perspective(t_vars *vars)
 	vars->proj = 1;
 	tabcoor_free(vars->tab, vars->tmap);
 	vars->tab = ft_maptrim(vars->name, vars->tmap, vars);
-	rot_all(vars, (M_PI + M_PI/8) , 'y');
+	rot_all(vars, (M_PI + M_PI / 8), 'y');
 	init_local(vars);
 	vars->local.x = 20.0;
 }
 
 void	ft_reset_isometrique(t_vars *vars)
 {
+	vars->propiso = 20;
 	vars->proj = 0;
 	tabcoor_free(vars->tab, vars->tmap);
 	vars->tab = ft_maptrim(vars->name, vars->tmap, vars);

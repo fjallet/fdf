@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 14:50:29 by fjallet           #+#    #+#             */
-/*   Updated: 2022/03/14 17:50:56 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/06/09 18:50:45 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@
 # define KEY_RIGHT 65363
 # define ISO 105
 # define PERSPECTIVE 112
+# define PLUS 65451
+# define MINUS 65453
 
 typedef struct s_data {
 	void	*img;
@@ -77,11 +79,13 @@ typedef struct s_vars {
 	t_pos	tmap;
 	t_pos	twindow;
 	t_pos	rot[2];
+	float	scale;
 	int		proj;
 	char	*name;
 	float	tplan;
 	float	cos;
 	int		fd;
+	int		propiso;
 }				t_vars;
 
 //fdf.c
@@ -142,6 +146,7 @@ void	ft_setup(t_vars *vars);
 //fdf_utils
 int		ft_atoi(const char *str);
 t_pos	ft_count(char *name);
+int		ft_subcount(char *str);
 
 //free
 void	tabcoor_free(t_coor **tab, t_pos tmap);
@@ -166,5 +171,6 @@ char	*ft_strdup(char *s1);
 size_t	ft_strchr(char *s, char c);
 char	*get_next_line(int fd, int id, int leak);
 int		ft_endfree(char *rst);
+int		ft_verifleak(int leak, char *rst);
 
 #endif
