@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:14:41 by fjallet           #+#    #+#             */
-/*   Updated: 2022/03/15 12:53:00 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/06/10 09:49:21 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_coor	crea_alphap(t_coor A, t_coor a, float t, t_vars *vars)
 
 	alphap.x = a.x;
 	alphap.y = (A.y + vars->local.y) * t;
-	alphap.z = (A.z + vars->local.z) * t;
+	alphap.z = (A.z * vars->hight + vars->local.z) * t;
 	return (alphap);
 }
 

@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 18:30:51 by fjallet           #+#    #+#             */
-/*   Updated: 2022/06/09 18:35:45 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/06/10 09:43:03 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_coor	ft_propiso(t_coor c, t_vars vars)
 
 	a.x = (c.x + vars.local.x) * vars.propiso;
 	a.y = (c.y + vars.local.y) * vars.propiso;
-	a.z = (c.z + vars.local.z) * vars.propiso;
+	a.z = (c.z * vars.hight + vars.local.z) * vars.propiso;
 	return (a);
 }
 

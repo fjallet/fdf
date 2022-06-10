@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 11:53:09 by fjallet           #+#    #+#             */
-/*   Updated: 2022/06/09 18:39:02 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/06/10 09:45:23 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	keyboardpress(int key, t_vars *vars)
 {
-	//printf("%i\n", key);
 	if (key == ESC)
 		close_window(vars);
 	if (key == KEY_T || key == KEY_Y || key == KEY_U || key == KEY_G || \
 	key == KEY_H || key == KEY_J)
 		rot_map(key, vars);
 	if (key == KEY_UP || key == KEY_DOWN || key == KEY_D || key == KEY_A || \
-	key == KEY_W || key == KEY_S || key == PLUS || key == MINUS)
+	key == KEY_W || key == KEY_S || key == PLUS || key == MINUS || \
+	key == KEY_1 || key == KEY_2)
 		trans_map(key, vars);
 	if ((key == KEY_Q || key == KEY_E) && vars->proj == 1)
 		rot_plan(vars, key);
@@ -90,6 +90,10 @@ int	trans_map(int key, t_vars *vars)
 		vars->propiso += 1;
 	if (key == MINUS && vars->propiso > 1)
 		vars->propiso -= 1;
+	if (key == KEY_1 && vars->hight >= 0.1)
+		vars->hight -= 0.1;
+	if (key == KEY_2 && vars->hight <= 2)
+		vars->hight += 0.1;
 	return (0);
 }
 

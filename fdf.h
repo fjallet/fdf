@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 14:50:29 by fjallet           #+#    #+#             */
-/*   Updated: 2022/06/09 18:50:45 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/06/10 09:56:18 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@
 # define PERSPECTIVE 112
 # define PLUS 65451
 # define MINUS 65453
+# define KEY_1 49
+# define KEY_2 50
 
 typedef struct s_data {
 	void	*img;
@@ -66,7 +68,7 @@ typedef struct s_2d {
 typedef struct s_pos {
 	int	x;
 	int	y;
-	int bo;
+	int	bo;
 }				t_pos;
 
 typedef struct s_vars {
@@ -86,6 +88,7 @@ typedef struct s_vars {
 	float	cos;
 	int		fd;
 	int		propiso;
+	float	hight;
 }				t_vars;
 
 //fdf.c
@@ -98,7 +101,7 @@ int		keyboardpress(int key, t_vars *vars);
 int		close_window(t_vars *vars);
 int		rot_map(int key, t_vars *vars);
 int		render_next_frame(t_vars *vars);
-int 	trans_map(int key, t_vars *vars);
+int		trans_map(int key, t_vars *vars);
 
 //ft_mlx_event_utils.c
 void	rot_all(t_vars *vars, float a, char c);
@@ -159,7 +162,6 @@ void	ft_putstr(char *str);
 //newmaptrim
 t_coor	*ft_splitcoor(char *s, char c, int l, t_pos tmap);
 t_coor	**ft_maptrim(char *name, t_pos tmap, t_vars *vars);
-
 
 //gnl
 size_t	ft_strlen(char *s);

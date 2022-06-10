@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 18:36:56 by fjallet           #+#    #+#             */
-/*   Updated: 2022/06/09 18:38:01 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/06/10 09:54:06 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ void	rot_plan(t_vars *vars, int key)
 void	ft_reset_perspective(t_vars *vars)
 {
 	vars->proj = 1;
+	vars->hight = 1;
 	tabcoor_free(vars->tab, vars->tmap);
 	vars->tab = ft_maptrim(vars->name, vars->tmap, vars);
-	rot_all(vars, (M_PI + M_PI / 8), 'y');
 	init_local(vars);
 	vars->local.x = 20.0;
 }
@@ -73,6 +73,7 @@ void	ft_reset_isometrique(t_vars *vars)
 {
 	vars->propiso = 20;
 	vars->proj = 0;
+	vars->hight = 1;
 	tabcoor_free(vars->tab, vars->tmap);
 	vars->tab = ft_maptrim(vars->name, vars->tmap, vars);
 	vars->local = init_coor();
