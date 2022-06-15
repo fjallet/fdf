@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 18:36:56 by fjallet           #+#    #+#             */
-/*   Updated: 2022/06/10 09:54:06 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/06/15 15:53:29 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	rot_all(t_vars *vars, float a, char c)
 	while (i < vars->tmap.x)
 	{
 		j = 0;
-		while (j < vars->tmap.y)
+		while (j <= vars->tmap.y)
 		{
 			if (c == 'z')
 				rot_switch(&vars->tab[i][j].x, &vars->tab[i][j].y, a);
@@ -65,6 +65,7 @@ void	ft_reset_perspective(t_vars *vars)
 	vars->hight = 1;
 	tabcoor_free(vars->tab, vars->tmap);
 	vars->tab = ft_maptrim(vars->name, vars->tmap, vars);
+	rot_all(vars, M_PI, 'y');
 	init_local(vars);
 	vars->local.x = 20.0;
 }

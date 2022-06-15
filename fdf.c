@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 18:07:30 by fjallet           #+#    #+#             */
-/*   Updated: 2022/06/10 09:41:16 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/06/15 15:29:48 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int argc, char **argv)
 {
 	t_vars	vars;
 
-	if (argc == 0)
+	if (argc == 0 || argv[1] == NULL)
 		return (1);
 	vars.tmap = ft_count(argv[1]);
 	vars.tab = ft_maptrim(argv[1], vars.tmap, &vars);

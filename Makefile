@@ -3,7 +3,7 @@ NAME = fdf
 HEADERS = fdf.h
 
 SRCS = fdf.c fdf_utils.c ft_coord.c ft_free.c ft_mlx_event.c ft_point.c ft_putpixel.c \
-		ft_split.c ft_vect.c tab_utils.c ft_maptrim.c gnl.c gnl_utils.c \
+		ft_vect.c tab_utils.c ft_maptrim.c gnl.c gnl_utils.c \
 		ft_iso.c ft_img_utils.c ft_mlx_event_utils.c
 
 OBJETS = ${SRCS:.c=.o}

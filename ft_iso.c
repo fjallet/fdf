@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 18:30:51 by fjallet           #+#    #+#             */
-/*   Updated: 2022/06/10 09:43:03 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/06/15 15:40:02 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_vars	*ft_rempiso(t_vars *vars)
 	while (i < vars->tmap.x)
 	{
 		j = 0;
-		while (j < vars->tmap.y)
+		while (j <= vars->tmap.y)
 		{
 			vars->ptab[i][j] = ft_proj_iso(vars->tab[i][j], *vars);
 			j++;
