@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mlx_event.c                                     :+:      :+:    :+:   */
+/*   ft_mlx_event_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 11:53:09 by fjallet           #+#    #+#             */
-/*   Updated: 2022/06/21 17:39:25 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/06/21 17:56:01 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,23 @@ int	keyboardpress(int key, t_vars *vars)
 {
 	if (key == ESC)
 		close_window(vars);
+	if (key == KEY_T || key == KEY_Y || key == KEY_U || key == KEY_G || \
+	key == KEY_H || key == KEY_J)
+		rot_map(key, vars);
+	if (key == KEY_UP || key == KEY_DOWN || key == KEY_D || key == KEY_A || \
+	key == KEY_W || key == KEY_S || key == PLUS || key == MINUS || \
+	key == KEY_1 || key == KEY_2)
+		trans_map(key, vars);
+	if ((key == KEY_Q || key == KEY_E) && vars->proj == 1)
+		rot_plan(vars, key);
+	if (key == ISO)
+		ft_reset_isometrique(vars);
+	if (key == PERSPECTIVE)
+		ft_reset_perspective(vars);
+	if (key == RESET && vars->proj == 0)
+		ft_reset_isometrique(vars);
+	if (key == RESET && vars->proj == 1)
+		ft_reset_perspective(vars);
 	return (0);
 }
 

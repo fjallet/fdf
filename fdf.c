@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 18:07:30 by fjallet           #+#    #+#             */
-/*   Updated: 2022/06/21 12:47:21 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/06/21 18:00:04 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,12 @@ void	ft_img(t_vars *vars)
 	mlx_loop_hook(vars->mlx, render_next_frame, vars);
 	mlx_loop(vars->mlx);
 }
+
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
 
-	if (argc == 0 || argv[1] == NULL)
+	if (argc == 0 || argv[1] == NULL || argc > 2)
 		return (1);
 	vars.tmap = ft_count(argv[1]);
 	vars.tab = ft_maptrim(argv[1], vars.tmap, &vars);
