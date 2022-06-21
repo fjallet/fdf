@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 14:50:29 by fjallet           #+#    #+#             */
-/*   Updated: 2022/06/15 15:55:38 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/06/21 12:32:39 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ typedef struct s_vars {
 //fdf.c
 void	ft_printstruct(t_vars vars);
 void	ft_img(t_vars *vars);
-int		main(int argc, char **argv);
 
 //ft_mlx_event.c
 int		keyboardpress(int key, t_vars *vars);

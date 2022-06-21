@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 19:40:02 by fjallet           #+#    #+#             */
-/*   Updated: 2022/06/09 18:51:39 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/06/15 16:12:54 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,16 @@ char	*get_next_line(int fd, int id, int leak)
 	int			bs;
 	char		*str;
 	static char	*rst[4096];
-	char		buf[11];
+	char		buf[101];
 
-	bs = 10;
+	bs = 100;
 	if (ft_verifleak(leak, rst[id]))
 		return (NULL);
 	if (!rst[id])
 		rst[id] = NULL;
-	while (ft_strchr(rst[id], '\n') == 0 && bs == 10)
+	while (ft_strchr(rst[id], '\n') == 0 && bs == 100)
 	{
-		bs = read(fd, buf, 10);
+		bs = read(fd, buf, 100);
 		if (bs < 0 || fd < 0 || fd > 1024)
 			return (NULL);
 		if (bs == 0 && ft_strlen(rst[id]) == 0 && ft_endfree(rst[id]))

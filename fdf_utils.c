@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 15:52:35 by fjallet           #+#    #+#             */
-/*   Updated: 2022/06/15 15:29:03 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/06/21 12:18:42 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_pos	ft_count(char *name)
 	if (fd == -1)
 		exit(0);
 	str = get_next_line(fd, 1, 0);
-	tmap.y = ft_subcount(str) - 1;
+	tmap.y = ft_subcount(str);
 	free(str);
 	i = 0;
 	while (str != NULL && i++ >= 0)
@@ -71,7 +71,7 @@ int	ft_subcount(char *str)
 	count = 0;
 	while (str && str[i] != '\0' && str[i])
 	{
-		if (str[i] == ' ' && i > 0 && str[i - 1] != ' ')
+		if (str[i] == ' ' && str[i + 1] != '\n' && str[i + 1] != ' ')
 			count++;
 		i++;
 	}

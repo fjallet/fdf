@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/07 15:14:31 by fjallet           #+#    #+#             */
-/*   Updated: 2022/06/15 15:41:32 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/06/21 11:40:06 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_remp(t_vars *vars, t_coor alpha)
 	while (++i < vars->tmap.x)
 	{
 		j = -1;
-		while (++j < vars->tmap.y + 1)
+		while (++j < vars->tmap.y)
 		{
 			if (vars->tab[i][j].x + vars->local.x > 1.0)
 			{

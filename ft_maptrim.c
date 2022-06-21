@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:11:13 by fjallet           #+#    #+#             */
-/*   Updated: 2022/06/15 15:54:47 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/06/21 12:26:38 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ t_coor	*ft_splitcoor(char *s, char c, int l, t_pos tmap)
 	j = 0;
 	if (!s)
 		return (0);
-	tab = malloc(sizeof(t_coor) * (tmap.y + 1));
+	tab = malloc(sizeof(t_coor) * (tmap.y));
 	if (!tab)
 		return (0);
 	while (s[i])
 	{
 		while (s[i] == c || s[i] == '\n')
 			i++;
-		if (s[i] != c && s[i])
+		if (s[i] != c && s[i] != 0)
 		{
 			tab[j].x = (float)l - tmap.x / 2;
 			tab[j].y = (float)j - tmap.y / 2;
