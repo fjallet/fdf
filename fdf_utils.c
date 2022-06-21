@@ -6,7 +6,7 @@
 /*   By: fjallet <fjallet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 15:52:35 by fjallet           #+#    #+#             */
-/*   Updated: 2022/06/21 12:18:42 by fjallet          ###   ########.fr       */
+/*   Updated: 2022/06/21 12:52:39 by fjallet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	ft_subcount(char *str)
 	count = 0;
 	while (str && str[i] != '\0' && str[i])
 	{
-		if (str[i] == ' ' && str[i + 1] != '\n' && str[i + 1] != ' ')
+		if (str[i] == ' ' && str[i + 1] != '\n' && str[i + 1] != ' ' && i > 0)
 			count++;
 		i++;
 	}
