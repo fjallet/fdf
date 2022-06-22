@@ -31,7 +31,7 @@ ${NAME}	 : ${OBJETS}
 
 ${NAME_BONUS} : ${OBJS_BONUS}
 			${MLX}
-			@${CC} -o ${NAME_BONUS} ${OBJS_BONUS} -L ./minilibx-linux -lmlx -lXext -lX11 -lm
+			@${CC} -o ${NAME} ${OBJS_BONUS} -L ./minilibx-linux -lmlx -lXext -lX11 -lm
 
 all: ${NAME}
 
